@@ -53,7 +53,7 @@ def test_all_teams_from_fixture_present():
 def test_collect_chips_from_history_fixture_and_unknown_codes():
     takim = json.loads((FIXTURES / "takim.json").read_text(encoding="utf-8"))["data"]
     cache = {
-        "477821": {
+        "101": {
             "1": {"totalPoints": 40, "chipCode": "chip.mystery"},
             "2": None,
             "9": {"totalPoints": 50, "chipCode": None},
@@ -61,9 +61,9 @@ def test_collect_chips_from_history_fixture_and_unknown_codes():
         }
     }
     chips, unknown = collect_chips(cache)
-    assert chips[477821]["3K"] == [10]
+    assert chips[101]["3K"] == [10]
     assert collect_chips({"1": {"5": {"chipCode": "chip.benchboost"}}})[0][1] == {"TTS": [5]}
-    assert chips[477821]["chip.mystery"] == [1]
+    assert chips[101]["chip.mystery"] == [1]
     assert unknown == {"chip.mystery"}
 
 
