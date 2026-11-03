@@ -25,20 +25,24 @@ def test_score_is_sum_of_weeks_after_two_and_handles_late_joiners():
     assert rows["A"]["points"] == 150
     assert rows["A"]["excludedPoints"] == 123
     assert rows["Late"]["points"] == 150 and rows["Late"]["excludedPoints"] == 0
-    assert rows["A"]["rank"] == rows["Late"]["rank"] == 1
+    assert (rows["A"]["rank"], rows["Late"]["rank"]) == (1, 2)  # tie: last GW 70 > 60
 
 
-def test_ties_share_rank_and_sort_by_name():
+def test_ties_broken_by_last_gameweek_points():
     current = [
-        {"teamId": 1, "teamName": "beta"},
-        {"teamId": 2, "teamName": "Alfa"},
-        {"teamId": 3, "teamName": "Gama"},
-        {"teamId": 4, "teamName": "Delta"},
+        {"teamId": 1, "teamName": "beta", "gameweekPoints": 30},
+        {"teamId": 2, "teamName": "Alfa", "gameweekPoints": 30},
+        {"teamId": 3, "teamName": "Gama", "gameweekPoints": 10},
+        {"teamId": 4, "teamName": "Delta", "gameweekPoints": 20},
+        {"teamId": 5, "teamName": "Epsilon", "gameweekPoints": 99},
     ]
     cache = {"1": {"3": {"totalPoints": 50}}, "2": {"3": {"totalPoints": 50}},
-             "3": {"3": {"totalPoints": 60}}, "4": {"3": {"totalPoints": 40}}}
+             "3": {"3": {"totalPoints": 60}}, "4": {"3": {"totalPoints": 50}},
+             "5": {"3": {"totalPoints": 40}}}
     rows = adjusted_standings(current, cache)
-    assert [(r["teamName"], r["rank"]) for r in rows] == [("Gama", 1), ("Alfa", 2), ("beta", 2), ("Delta", 4)]
+    # 50-point tie broken by last gameweek points; equal on both -> shared rank
+    assert [(r["teamName"], r["rank"]) for r in rows] == [
+        ("Gama", 1), ("Alfa", 2), ("beta", 2), ("Delta", 4), ("Epsilon", 5)]
 
 
 def test_all_teams_from_fixture_present():
@@ -81,3 +85,4 @@ def test_render_marks_early_chip_and_escapes_names():
 def test_legend_says_early_chips_are_not_spent():
     html = render([], {}, 10, datetime(2026, 11, 3, 10, 0))
     assert "joker de harcanmış sayılmaz" in html
+    assert "Eşit puanda son maç haftası puanı yüksek olan önde" in html

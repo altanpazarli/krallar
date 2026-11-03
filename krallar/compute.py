@@ -24,7 +24,8 @@ def adjusted_standings(current: list[dict], cache: dict) -> list[dict]:
     """Score = sum of the team's own weekly totalPoints for gw > EXCLUDED_UNTIL_GW.
 
     `current` is the league standings of the latest gameweek (team list, league points,
-    last gameweek points). Equal scores share a rank; ties are ordered by team name.
+    last gameweek points). Ties on score are broken by the last gameweek's points;
+    only teams equal on both share a rank (ordered by team name).
     """
     rows = []
     for row in current:
@@ -40,13 +41,14 @@ def adjusted_standings(current: list[dict], cache: dict) -> list[dict]:
                 "excludedPoints": _week_points(weeks, lambda gw: gw <= EXCLUDED_UNTIL_GW),
             }
         )
-    rows.sort(key=lambda r: (-r["points"], r["teamName"].casefold()))
-    prev_points = None
+    rows.sort(key=lambda r: (-r["points"], -r["gameweekPoints"], r["teamName"].casefold()))
+    prev_key = None
     rank = 0
     for i, row in enumerate(rows, start=1):
-        if row["points"] != prev_points:
+        key = (row["points"], row["gameweekPoints"])
+        if key != prev_key:
             rank = i
-            prev_points = row["points"]
+            prev_key = key
         row["rank"] = rank
     return rows
 
