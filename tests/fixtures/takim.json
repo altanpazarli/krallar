@@ -1,0 +1,470 @@
+{
+  "status": true,
+  "errors": null,
+  "message": "OK",
+  "data": {
+    "teamId": 477821,
+    "teamName": "İsengard Zorlu PSM",
+    "avatar": "",
+    "gameweekId": 10,
+    "formation": "4-4-2",
+    "matchPoints": 72,
+    "nostradamusPoints": 5,
+    "totalPoints": 77,
+    "live": false,
+    "cumulativePoints": 545,
+    "overallRank": 152507,
+    "weeklyRank": 17575,
+    "teamValue": 94,
+    "chipUsedAt": "2026-10-30T15:59:25.848396Z",
+    "captainPlayerId": 148,
+    "viceCaptainPlayerId": 1471,
+    "autoSubs": [
+      {
+        "playerOutId": 176,
+        "playerInId": 608,
+        "reason": "0_minutes_played"
+      },
+      {
+        "playerOutId": 1471,
+        "playerInId": 212,
+        "reason": "0_minutes_played"
+      }
+    ],
+    "teamBreakdown": {
+      "chipCode": "chip.triplecaptain",
+      "players": [
+        {
+          "playerId": 161,
+          "positionId": 1,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 1,
+          "rawPoints": 2,
+          "totalPoints": 2,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 28,
+          "positionId": 2,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 1,
+          "rawPoints": 6,
+          "totalPoints": 6,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "CLEAN_SHEET",
+              "count": 1,
+              "pointsPer": 4,
+              "subtotal": 4
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 172,
+          "positionId": 2,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 2,
+          "rawPoints": 1,
+          "totalPoints": 1,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "GOALS_CONCEDED_2",
+              "count": 1,
+              "pointsPer": -1,
+              "subtotal": -1
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 151,
+          "positionId": 2,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 3,
+          "rawPoints": 2,
+          "totalPoints": 2,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 277,
+          "positionId": 2,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 4,
+          "rawPoints": 5,
+          "totalPoints": 5,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "ASSIST",
+              "count": 1,
+              "pointsPer": 3,
+              "subtotal": 3
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 176,
+          "positionId": 3,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": false,
+          "slotOrder": 2,
+          "rawPoints": 0,
+          "totalPoints": 0,
+          "counted": false,
+          "matchStatus": "DID_NOT_PLAY"
+        },
+        {
+          "playerId": 12,
+          "positionId": 3,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 2,
+          "rawPoints": 3,
+          "totalPoints": 3,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "CLEAN_SHEET",
+              "count": 1,
+              "pointsPer": 1,
+              "subtotal": 1
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 388,
+          "positionId": 3,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 3,
+          "rawPoints": 9,
+          "totalPoints": 9,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "GOAL",
+              "count": 1,
+              "pointsPer": 5,
+              "subtotal": 5
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            },
+            {
+              "eventType": "BONUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 1471,
+          "positionId": 4,
+          "captain": false,
+          "viceCaptain": true,
+          "isStarting": false,
+          "slotOrder": 3,
+          "rawPoints": 0,
+          "totalPoints": 0,
+          "counted": false,
+          "matchStatus": "DID_NOT_PLAY"
+        },
+        {
+          "playerId": 148,
+          "positionId": 4,
+          "captain": true,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 2,
+          "rawPoints": 11,
+          "totalPoints": 33,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "GOAL",
+              "count": 1,
+              "pointsPer": 4,
+              "subtotal": 4
+            },
+            {
+              "eventType": "ASSIST",
+              "count": 1,
+              "pointsPer": 3,
+              "subtotal": 3
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            },
+            {
+              "eventType": "BONUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 404,
+          "positionId": 4,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 3,
+          "rawPoints": 6,
+          "totalPoints": 6,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "GOAL",
+              "count": 1,
+              "pointsPer": 4,
+              "subtotal": 4
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 195,
+          "positionId": 1,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": false,
+          "slotOrder": 1,
+          "rawPoints": 11,
+          "totalPoints": 0,
+          "counted": false,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "ASSIST",
+              "count": 1,
+              "pointsPer": 3,
+              "subtotal": 3
+            },
+            {
+              "eventType": "CLEAN_SHEET",
+              "count": 1,
+              "pointsPer": 4,
+              "subtotal": 4
+            },
+            {
+              "eventType": "SAVES_3",
+              "count": 1,
+              "pointsPer": 1,
+              "subtotal": 1
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            },
+            {
+              "eventType": "BONUS",
+              "count": 1,
+              "pointsPer": 1,
+              "subtotal": 1
+            }
+          ]
+        },
+        {
+          "playerId": 608,
+          "positionId": 3,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 1,
+          "rawPoints": 2,
+          "totalPoints": 2,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 212,
+          "positionId": 3,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": true,
+          "slotOrder": 1,
+          "rawPoints": 3,
+          "totalPoints": 3,
+          "counted": true,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "CLEAN_SHEET",
+              "count": 1,
+              "pointsPer": 1,
+              "subtotal": 1
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        },
+        {
+          "playerId": 48,
+          "positionId": 2,
+          "captain": false,
+          "viceCaptain": false,
+          "isStarting": false,
+          "slotOrder": 4,
+          "rawPoints": 0,
+          "totalPoints": 0,
+          "counted": false,
+          "matchStatus": "PLAYED",
+          "breakdown": [
+            {
+              "eventType": "YELLOW_CARD",
+              "count": 1,
+              "pointsPer": -1,
+              "subtotal": -1
+            },
+            {
+              "eventType": "GOALS_CONCEDED_2",
+              "count": 1,
+              "pointsPer": -1,
+              "subtotal": -1
+            },
+            {
+              "eventType": "APPEARANCE_60_PLUS",
+              "count": 1,
+              "pointsPer": 2,
+              "subtotal": 2
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "eventType": "CAPTAIN",
+          "playerId": 148,
+          "rawPoints": 11,
+          "factor": 3,
+          "totalPoints": 33
+        }
+      ],
+      "matchPoints": 72
+    },
+    "highestPlayers": [
+      {
+        "playerId": 195,
+        "order": 1,
+        "points": 11
+      },
+      {
+        "playerId": 148,
+        "order": 2,
+        "points": 11
+      },
+      {
+        "playerId": 388,
+        "order": 3,
+        "points": 9
+      }
+    ],
+    "lowestPlayers": [
+      {
+        "playerId": 48,
+        "order": 1,
+        "points": 0
+      },
+      {
+        "playerId": 172,
+        "order": 2,
+        "points": 1
+      },
+      {
+        "playerId": 161,
+        "order": 3,
+        "points": 2
+      }
+    ]
+  }
+}

@@ -1,0 +1,692 @@
+{
+ "294892": {
+  "1": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 85
+  },
+  "10": {
+   "chipCode": null,
+   "totalPoints": 74
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 57
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 57
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 49
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 58
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 64
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 89
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 81
+  }
+ },
+ "322757": {
+  "1": {
+   "chipCode": null,
+   "totalPoints": 44
+  },
+  "10": {
+   "chipCode": "chip.quadruplecaptain",
+   "totalPoints": 90
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 44
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 67
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 52
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 57
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 109
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 44
+  }
+ },
+ "347066": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 63
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 86
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 67
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 57
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 111
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 54
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 89
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 72
+  }
+ },
+ "425098": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 56
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 50
+  },
+  "3": {
+   "chipCode": "chip.unlimitedbudget",
+   "totalPoints": 68
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 42
+  },
+  "5": {
+   "chipCode": "chip.attack",
+   "totalPoints": 65
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 110
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 75
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 93
+  }
+ },
+ "455205": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 93
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 86
+  },
+  "3": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 89
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 65
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 115
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 54
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 57
+  }
+ },
+ "455812": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 65
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 96
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 65
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 43
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 52
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 87
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 49
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 54
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 46
+  }
+ },
+ "456928": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 41
+  },
+  "3": {
+   "chipCode": "chip.benchboost",
+   "totalPoints": 64
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 96
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 126
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 79
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 63
+  }
+ },
+ "457357": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 73
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 46
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 61
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 65
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 42
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 125
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 82
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 63
+  }
+ },
+ "457538": {
+  "1": null,
+  "10": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 59
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 69
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 58
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 40
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 88
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 62
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 58
+  },
+  "9": {
+   "chipCode": "chip.benchboost",
+   "totalPoints": 70
+  }
+ },
+ "457624": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 72
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 67
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 84
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 63
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 94
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 69
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 50
+  },
+  "9": {
+   "chipCode": "chip.benchboost",
+   "totalPoints": 79
+  }
+ },
+ "473787": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "2": null,
+  "3": {
+   "chipCode": "chip.unlimitedbudget",
+   "totalPoints": 61
+  },
+  "4": {
+   "chipCode": "chip.benchboost",
+   "totalPoints": 61
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 72
+  },
+  "6": {
+   "chipCode": "chip.quadruplecaptain",
+   "totalPoints": 145
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 42
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 58
+  }
+ },
+ "477821": {
+  "1": null,
+  "10": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 77
+  },
+  "2": null,
+  "3": {
+   "chipCode": null,
+   "totalPoints": 46
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 46
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 47
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 130
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 76
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 68
+  }
+ },
+ "478414": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "2": null,
+  "3": {
+   "chipCode": null,
+   "totalPoints": 61
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 63
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 51
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 89
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 65
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 76
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 82
+  }
+ },
+ "502060": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 64
+  },
+  "2": null,
+  "3": {
+   "chipCode": null,
+   "totalPoints": 61
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 46
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 31
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 80
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "8": {
+   "chipCode": "chip.quadruplecaptain",
+   "totalPoints": 58
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 70
+  }
+ },
+ "504617": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 82
+  },
+  "2": null,
+  "3": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 73
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 58
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 77
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 95
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 50
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 55
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 56
+  }
+ },
+ "504632": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 34
+  },
+  "2": null,
+  "3": {
+   "chipCode": null,
+   "totalPoints": 50
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 49
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 42
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 51
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "8": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 96
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 63
+  }
+ },
+ "515517": {
+  "1": null,
+  "10": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "2": null,
+  "3": {
+   "chipCode": null,
+   "totalPoints": 70
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 71
+  },
+  "5": {
+   "chipCode": null,
+   "totalPoints": 40
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 89
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 75
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 75
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 103
+  }
+ },
+ "6560": {
+  "1": {
+   "chipCode": null,
+   "totalPoints": 47
+  },
+  "10": {
+   "chipCode": null,
+   "totalPoints": 71
+  },
+  "2": {
+   "chipCode": null,
+   "totalPoints": 76
+  },
+  "3": {
+   "chipCode": null,
+   "totalPoints": 56
+  },
+  "4": {
+   "chipCode": null,
+   "totalPoints": 59
+  },
+  "5": {
+   "chipCode": "chip.triplecaptain",
+   "totalPoints": 65
+  },
+  "6": {
+   "chipCode": null,
+   "totalPoints": 111
+  },
+  "7": {
+   "chipCode": null,
+   "totalPoints": 60
+  },
+  "8": {
+   "chipCode": null,
+   "totalPoints": 87
+  },
+  "9": {
+   "chipCode": null,
+   "totalPoints": 59
+  }
+ }
+}
