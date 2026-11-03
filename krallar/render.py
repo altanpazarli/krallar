@@ -30,7 +30,7 @@ def _chip_cell(weeks: list[int] | None) -> str:
     parts = []
     for gw in weeks:
         if gw <= EXCLUDED_UNTIL_GW:
-            parts.append(f'<span class="early" title="Puanı sayılmayan hafta">{gw}</span>')
+            parts.append(f'<span class="early" title="Sayılmayan hafta: puan ve joker geçersiz">{gw}</span>')
         else:
             parts.append(str(gw))
     return f"<td>{', '.join(parts)}</td>"
@@ -75,7 +75,7 @@ def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime) -
 </tbody>
 </table></div>
 <div class="legend">{legend}<br>
-Joker sütunlarındaki sayı, jokerin kullanıldığı maç haftasıdır. <span class="early">Gri</span> haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz ama joker harcanmış sayılır.</div>
+Joker sütunlarındaki sayı, jokerin kullanıldığı maç haftasıdır. <span class="early">Gri</span> haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz.</div>
 </body>
 </html>
 """

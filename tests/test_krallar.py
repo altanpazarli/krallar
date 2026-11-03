@@ -68,6 +68,11 @@ def test_render_marks_early_chip_and_escapes_names():
     chips = {1: {"3K": [10], "LB": [2]}}
     html = render(rows, chips, 10, datetime(2026, 11, 3, 10, 0))
     assert "&lt;b&gt;X&lt;/b&gt;" in html
-    assert '<span class="early" title="Puanı sayılmayan hafta">2</span>' in html
+    assert '<span class="early" title="Sayılmayan hafta: puan ve joker geçersiz">2</span>' in html
     assert "<td>10</td>" in html
     assert "03.11.2026 10:00 (MH10)" in html
+
+
+def test_legend_says_early_chips_are_not_spent():
+    html = render([], {}, 10, datetime(2026, 11, 3, 10, 0))
+    assert "joker de harcanmış sayılmaz" in html
