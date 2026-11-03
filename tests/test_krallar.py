@@ -68,9 +68,14 @@ def test_render_marks_early_chip_and_escapes_names():
     chips = {1: {"3K": [10], "LB": [2]}}
     html = render(rows, chips, 10, datetime(2026, 11, 3, 10, 0))
     assert "&lt;b&gt;X&lt;/b&gt;" in html
-    assert '<span class="early" title="Sayılmayan hafta: puan ve joker geçersiz">2</span>' in html
-    assert "<td>10</td>" in html
-    assert "03.11.2026 10:00 (MH10)" in html
+    # mobile card badges
+    assert '<span class="b early" title="Limitsiz Bütçe: MH2 (sayılmaz, joker geçersiz)">LB · 2</span>' in html
+    assert '<span class="b used" title="Tripleks Kaptan: MH10">3K · 10</span>' in html
+    assert '<span class="b free" title="Hücum!: kullanılmadı">HÜ</span>' in html
+    # desktop table cells
+    assert '<td><span class="b used" title="Tripleks Kaptan: MH10">10</span></td>' in html
+    assert "Güncelleme: 03.11.2026 10:00" in html
+    assert "MH3 – MH10" in html
 
 
 def test_legend_says_early_chips_are_not_spent():
