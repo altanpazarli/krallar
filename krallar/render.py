@@ -185,7 +185,7 @@ def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime, i
 <div><span class="b early">3K · 1</span>MH1-{EXCLUDED_UNTIL_GW}: puan ve joker sayılmaz</div>
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 </div>
-<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Cuma, Cumartesi, Pazar ve Salı 23:59'da güncellenir; maç haftası sürerken son haftanın puanı geçicidir.</p>
+<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her gün 23:59'da, Salı günleri ayrıca 10:00'da güncellenir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>
 </main>
 </body>

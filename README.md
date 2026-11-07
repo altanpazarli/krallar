@@ -1,8 +1,8 @@
 # Krallar Ligi Sıralaması
 
 TFF Fantezi Lig "Krallar" ligi (47061) için 1. ve 2. maç haftaları **hariç** sıralama ve
-her takımın hangi hafta hangi jokeri kullandığını gösteren sayfa. Cuma, Cumartesi, Pazar ve
-Salı 23:59 TSİ'de GitHub Actions ile güncellenir ve GitHub Pages'te yayınlanır. Maç haftası
+her takımın hangi hafta hangi jokeri kullandığını gösteren sayfa. Her gün 23:59 TSİ'de, Salı
+günleri ayrıca 10:00 TSİ'de GitHub Actions ile güncellenir ve GitHub Pages'te yayınlanır. Maç haftası
 sürerken son haftanın puanı geçicidir; sayfada "MH.. devam ediyor" yazar.
 
 **Puan** = her takımın kendi maç haftası geçmişinden MH3..son hafta puanlarının toplamı.
