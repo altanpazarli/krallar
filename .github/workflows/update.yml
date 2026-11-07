@@ -2,7 +2,7 @@ name: Sıralamayı güncelle
 
 on:
   schedule:
-    - cron: "0 7 * * 2" # Salı 07:00 UTC = 10:00 TSİ
+    - cron: "59 20 * * 5,6,0,2" # Cuma, Cumartesi, Pazar, Salı 20:59 UTC = 23:59 TSİ
   workflow_dispatch:
 
 permissions:

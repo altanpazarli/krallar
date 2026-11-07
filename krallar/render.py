@@ -124,10 +124,11 @@ def _table_cell(weeks: list[int] | None, name: str) -> str:
     return f"<td>{badges}</td>"
 
 
-def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime) -> str:
+def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime, in_progress: bool = False) -> str:
     columns = _columns(chips)
     first_gw = EXCLUDED_UNTIL_GW + 1
     stamp = updated_at.strftime("%d.%m.%Y %H:%M")
+    live_pill = f'<span class="pill">MH{gameweek} devam ediyor</span>' if in_progress else ""
 
     cards, trs = [], []
     for row in rows:
@@ -163,7 +164,7 @@ def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime) -
 <body>
 <header><div class="head">
 <div><div class="kicker cond">TFF Fantezi Lig</div><h1 class="cond">Krallar Ligi</h1></div>
-<div class="pills"><span class="pill accent">MH{first_gw} – MH{gameweek}</span><span class="pill">Güncelleme: {stamp}</span></div>
+<div class="pills"><span class="pill accent">MH{first_gw} – MH{gameweek}</span>{live_pill}<span class="pill">Güncelleme: {stamp}</span></div>
 </div></header>
 <main>
 <div class="bar"><h2 class="cond">Sıralama</h2><span class="muted">{len(rows)} takım</span></div>
@@ -184,7 +185,7 @@ def render(rows: list[dict], chips: dict, gameweek: int, updated_at: datetime) -
 <div><span class="b early">3K · 1</span>MH1-{EXCLUDED_UNTIL_GW}: puan ve joker sayılmaz</div>
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 </div>
-<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her Salı 10:00'da güncellenir.</p>
+<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Cuma, Cumartesi, Pazar ve Salı 23:59'da güncellenir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>
 </main>
 </body>

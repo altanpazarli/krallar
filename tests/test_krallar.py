@@ -82,6 +82,41 @@ def test_render_marks_early_chip_and_escapes_names():
     assert "MH3 – MH10" in html
 
 
+class FakeClient:
+    def __init__(self, points):
+        self.points = points  # {(team, gw): totalPoints or None}
+        self.calls = []
+
+    def get_history(self, team_id, gw):
+        self.calls.append((team_id, gw))
+        p = self.points.get((team_id, gw))
+        return None if p is None else {"totalPoints": p, "live": False, "teamBreakdown": {"chipCode": None}}
+
+
+def test_final_gameweeks_needs_finished_points_and_bonuses():
+    from krallar.__main__ import final_gameweeks
+    day = lambda pts, bon: {"allPointsAdded": pts, "allBonusesAdded": bon}
+    fx = {"gameweeks": [
+        {"id": 10, "finished": True, "matchDays": [day(True, True)]},
+        {"id": 11, "finished": True, "matchDays": [day(True, False)]},
+        {"id": 12, "finished": False, "matchDays": [day(False, False)]},
+    ]}
+    assert final_gameweeks(fx) == {10}
+
+
+def test_week_in_progress_is_not_cached_and_is_refetched():
+    from krallar.__main__ import merge_weeks, update_cache
+    # week 3 is in progress but an older run cached a partial score for it
+    cache = {"1": {"1": {"totalPoints": 40, "chipCode": None}, "3": {"totalPoints": 2, "chipCode": None}}}
+    client = FakeClient({(1, 1): 40, (1, 2): 50, (1, 3): 8})
+    pending = update_cache(client, cache, [1], 3, final={1, 2})
+    assert client.calls == [(1, 2), (1, 3)]               # final + cached week 1 is not refetched
+    assert cache["1"]["2"]["totalPoints"] == 50           # newly final week is cached
+    assert "3" not in cache["1"]                          # in-progress week is never cached (stale entry dropped)
+    merged = merge_weeks(cache, pending)
+    assert merged["1"]["3"]["totalPoints"] == 8           # but its current points are used
+
+
 def test_legend_says_early_chips_are_not_spent():
     html = render([], {}, 10, datetime(2026, 11, 3, 10, 0))
     assert "joker de harcanmış sayılmaz" in html

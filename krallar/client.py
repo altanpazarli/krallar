@@ -60,5 +60,8 @@ class Client:
             params["gameweek-id"] = gameweek
         return self._get(f"fantasy-team/leagues/{LEAGUE_ID}/standings", params)
 
+    def get_fixtures(self) -> dict | None:
+        return self._get("projection/stats/fixtures", {"league-id": 1})
+
     def get_history(self, team_id: int, gameweek: int) -> dict | None:
         return self._get(f"fantasy-team/teams/{team_id}/history/{gameweek}")
