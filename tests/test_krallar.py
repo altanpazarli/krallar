@@ -175,9 +175,9 @@ def test_render_rank_change_badges_movers_and_column():
     assert '<th class="cond" title="Önceki haftaya göre sıra değişimi">±</th>' in html
     assert "değişim: MH9 sırasına göre" in html
     movers = html.split('<section class="movers"')[1].split("</section>")[0]
-    assert "En çok yükselen</div><div class=\"name\">Casino</div>" in movers
-    assert "En çok düşen</div><div class=\"name\">Amsterdam</div>" in movers
-    assert "1. → 3." in movers and "4. → 1." in movers
+    up, down = movers.split('<div class="mover">')[1:]
+    assert "En çok yükselen" in up and '<span class="name">Casino</span> <span class="muted">4. → 1.</span>' in up
+    assert "En çok düşen" in down and '<span class="name">Amsterdam</span> <span class="muted">1. → 3.</span>' in down
 
 
 def test_movers_list_all_teams_sharing_the_biggest_move_and_skip_empty_side():
@@ -186,10 +186,12 @@ def test_movers_list_all_teams_sharing_the_biggest_move_and_skip_empty_side():
         {"teamId": 2, "teamName": "B", "points": 8, "gameweekPoints": 0, "rank": 2, "previousRank": 3, "rankChange": 1},
         {"teamId": 3, "teamName": "C", "points": 7, "gameweekPoints": 0, "rank": 3, "previousRank": 1, "rankChange": -2},
     ]
-    movers = render(rows, {}, 10, datetime(2026, 11, 3), previous_gw=9).split('<section class="movers"')[1]
-    assert '<div class="name">A, B</div>' in movers
-    assert "2. → 1." not in movers and "3. → 2." not in movers  # no single path for a shared move
-    assert "1. → 3." in movers
+    movers = render(rows, {}, 10, datetime(2026, 11, 3), previous_gw=9).split('<section class="movers"')[1].split("</section>")[0]
+    # every team sharing the biggest move gets its own previous -> current rank
+    assert '<span class="name">A</span> <span class="muted">2. → 1.</span>' in movers
+    assert '<span class="name">B</span> <span class="muted">3. → 2.</span>' in movers
+    assert '<span class="name">C</span> <span class="muted">1. → 3.</span>' in movers
+    assert movers.count('class="mv up"') == 1  # one badge for the shared move
     still = [dict(r, rankChange=0) for r in rows]
     assert '<section class="movers"' not in render(still, {}, 10, datetime(2026, 11, 3), previous_gw=9)
 
@@ -202,3 +204,12 @@ def test_update_time_is_turkish_time_and_marked_for_local_display():
     assert '<time data-local datetime="2026-11-08T00:09+03:00"' in html  # converted to TSİ
     assert ">08.11.2026 00:09 TSİ</time>" in html  # fallback text without JavaScript
     assert "time[data-local]" in html and "getHours()" in html  # browser rewrites it to local time
+
+
+def test_movers_come_first_on_wide_screens_without_extra_markup():
+    from krallar.render import CSS
+    wide = CSS.split("@media (min-width:760px)")[1]
+    assert ".movers{order:-1}" in wide and ".mover{flex-direction:row" in wide
+    rows = [{"teamId": 1, "teamName": "A", "points": 9, "gameweekPoints": 0, "rank": 1, "previousRank": 2, "rankChange": 1}]
+    html = render(rows, {}, 10, datetime(2026, 11, 3), in_progress=True, previous_gw=9)
+    assert "geçici" not in html.split('<section class="movers"')[1].split("</section>")[0]  # no provisional tag in the boxes

@@ -45,9 +45,10 @@ h2{margin:0;font-size:22px;font-weight:700;text-transform:uppercase;letter-spaci
 .movers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .mover{background:#fff;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 2px rgba(18,22,28,.06);min-width:0}
 .mover .label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4A515C}
+.mover .teams{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mover .tm{display:flex;flex-direction:column;min-width:0}
 .mover .name{font-weight:600;font-size:15px}
-.mover .line{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.mover .mv{font-size:13px;padding:3px 8px;border-radius:6px}
+.mover .mv{align-self:flex-start;font-size:13px;padding:3px 8px;border-radius:6px}
 .mover .mv svg{width:9px;height:8px}
 /* mobile cards */
 .cards{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -86,7 +87,12 @@ td .none{color:#5A6270}
   h1{font-size:56px}
   main{padding:28px 24px 48px}
   .cards{display:none}
-  .movers{grid-template-columns:repeat(2,minmax(0,320px))}
+  .movers{order:-1}
+  .mover{flex-direction:row;align-items:center;gap:12px;padding:12px 16px}
+  .mover .label{flex:none;width:118px}
+  .mover .mv{flex:none;align-self:center}
+  .mover .teams{flex-direction:row;flex-wrap:wrap;gap:2px 16px}
+  .mover .tm{display:block;white-space:nowrap}
   .tablewrap{display:block}
   .legend dl{grid-template-columns:repeat(5,auto 1fr);column-gap:8px}
   .keys{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
@@ -165,14 +171,14 @@ def _mover_box(label: str, rows: list[dict]) -> str:
     """Summary card for the team(s) with the largest move in one direction."""
     if not rows:
         return ""
-    names = ", ".join(escape(r["teamName"]) for r in rows)
-    first = rows[0]
-    # previous -> current ranks only make sense for a single team
-    path = f'<span class="muted">{first["previousRank"]}. → {first["rank"]}.</span>' if len(rows) == 1 else ""
-    return (
-        f'<div class="mover"><div class="label">{label}</div><div class="name">{names}</div>'
-        f'<div class="line">{_move_badge(first)}{path}</div></div>'
+    teams = "".join(
+        f'<span class="tm"><span class="name">{escape(r["teamName"])}</span> '
+        f'<span class="muted">{r["previousRank"]}. → {r["rank"]}.</span></span>'
+        for r in rows
     )
+    badge = _move_badge(rows[0]).replace(f' title="Önceki hafta {rows[0]["previousRank"]}. sıradaydı"', "")
+    return f'<div class="mover"><div class="label">{label}</div>{badge}<div class="teams">{teams}</div></div>'
+
 
 
 def _top_movers(rows: list[dict]) -> str:
