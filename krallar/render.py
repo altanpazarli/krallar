@@ -83,7 +83,8 @@ td .none{color:#5A6270}
   header{padding:40px 24px 32px}
   h1{font-size:56px}
   main{padding:28px 24px 48px}
-  .cards,.movers{display:none}
+  .cards{display:none}
+  .movers{grid-template-columns:repeat(2,minmax(0,320px))}
   .tablewrap{display:block}
   .legend dl{grid-template-columns:repeat(5,auto 1fr);column-gap:8px}
   .keys{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
