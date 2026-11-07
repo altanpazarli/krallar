@@ -35,9 +35,10 @@ h2{margin:0;font-size:22px;font-weight:700;text-transform:uppercase;letter-spaci
 .movers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .mover{background:#fff;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 2px rgba(18,22,28,.06);min-width:0}
 .mover .label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#4A515C}
+.mover .teams{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mover .tm{display:flex;flex-direction:column;min-width:0}
 .mover .name{font-weight:600;font-size:15px}
-.mover .line{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.mover .mv{font-size:13px;padding:3px 8px;border-radius:6px}
+.mover .mv{align-self:flex-start;font-size:13px;padding:3px 8px;border-radius:6px}
 .mover .mv svg{width:9px;height:8px}
 /* mobile cards */
 .cards{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -76,7 +77,12 @@ td .none{color:#5A6270}
   h1{font-size:56px}
   main{padding:28px 24px 48px}
   .cards{display:none}
-  .movers{grid-template-columns:repeat(2,minmax(0,320px))}
+  .movers{order:-1}
+  .mover{flex-direction:row;align-items:center;gap:12px;padding:12px 16px}
+  .mover .label{flex:none;width:118px}
+  .mover .mv{flex:none;align-self:center}
+  .mover .teams{flex-direction:row;flex-wrap:wrap;gap:2px 16px}
+  .mover .tm{display:block;white-space:nowrap}
   .tablewrap{display:block}
   .legend dl{grid-template-columns:repeat(5,auto 1fr);column-gap:8px}
   .keys{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
@@ -86,11 +92,11 @@ td .none{color:#5A6270}
 <body>
 <header><div class="head">
 <div><div class="kicker cond">TFF Fantezi Lig</div><h1 class="cond">Krallar Ligi</h1></div>
-<div class="pills"><span class="pill accent">MH3 – MH11</span><span class="pill">MH11 devam ediyor</span><span class="pill">Güncelleme: <time data-local datetime="2026-11-08T00:14+03:00" title="Türkiye saati: 08.11.2026 00:14">08.11.2026 00:14 TSİ</time></span></div>
+<div class="pills"><span class="pill accent">MH3 – MH11</span><span class="pill">MH11 devam ediyor</span><span class="pill">Güncelleme: <time data-local datetime="2026-11-08T00:57+03:00" title="Türkiye saati: 08.11.2026 00:57">08.11.2026 00:57 TSİ</time></span></div>
 </div></header>
 <main>
 <div class="bar"><h2 class="cond">Sıralama</h2><span class="muted">18 takım · değişim: MH10 sırasına göre</span></div>
-<section class="movers" aria-label="Haftanın hareketleri"><div class="mover"><div class="label">En çok yükselen</div><div class="name">eCho</div><div class="line"><span class="mv up" title="Önceki hafta 10. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></svg><span aria-hidden="true">6</span><span class="sr">6 sıra yükseldi</span></span><span class="muted">10. → 4.</span></div></div><div class="mover"><div class="label">En çok düşen</div><div class="name">abd fc, Şef Galacticos</div><div class="line"><span class="mv down" title="Önceki hafta 4. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></svg><span aria-hidden="true">3</span><span class="sr">3 sıra düştü</span></span></div></div></section>
+<section class="movers" aria-label="Haftanın hareketleri"><div class="mover"><div class="label">En çok yükselen</div><span class="mv up"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></svg><span aria-hidden="true">6</span><span class="sr">6 sıra yükseldi</span></span><div class="teams"><span class="tm"><span class="name">eCho</span> <span class="muted">10. → 4.</span></span></div></div><div class="mover"><div class="label">En çok düşen</div><span class="mv down"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></svg><span aria-hidden="true">3</span><span class="sr">3 sıra düştü</span></span><div class="teams"><span class="tm"><span class="name">abd fc</span> <span class="muted">4. → 7.</span></span><span class="tm"><span class="name">Şef Galacticos</span> <span class="muted">7. → 10.</span></span></div></div></section>
 <ol class="cards">
 <li class="card"><div class="rk"><div class="r cond top">1</div><span class="mv up" title="Önceki hafta 3. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></svg><span aria-hidden="true">2</span><span class="sr">2 sıra yükseldi</span></span></div><div class="mid"><div class="name">Beyobası</div><div class="chips"><span class="b free" title="Tripleks Kaptan: kullanılmadı">3K</span><span class="b free" title="Dört Dörtlük Kaptan: kullanılmadı">4K</span><span class="b free" title="Tüm Takım Sahaya: kullanılmadı">TTS</span><span class="b free" title="Hücum!: kullanılmadı">HÜ</span><span class="b free" title="Limitsiz Bütçe: kullanılmadı">LB</span></div></div><div class="score"><div class="pts cond">626</div><div class="muted">MH11: 44</div></div></li>
 <li class="card"><div class="rk"><div class="r cond top">2</div><span class="mv down" title="Önceki hafta 1. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></svg><span aria-hidden="true">1</span><span class="sr">1 sıra düştü</span></span></div><div class="mid"><div class="name">Alz</div><div class="chips"><span class="b free" title="Tripleks Kaptan: kullanılmadı">3K</span><span class="b free" title="Dört Dörtlük Kaptan: kullanılmadı">4K</span><span class="b used" title="Tüm Takım Sahaya: MH3">TTS · 3</span><span class="b free" title="Hücum!: kullanılmadı">HÜ</span><span class="b free" title="Limitsiz Bütçe: kullanılmadı">LB</span></div></div><div class="score"><div class="pts cond">624</div><div class="muted">MH11: 11</div></div></li>
