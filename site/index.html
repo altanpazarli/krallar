@@ -86,7 +86,7 @@ td .none{color:#5A6270}
 <body>
 <header><div class="head">
 <div><div class="kicker cond">TFF Fantezi Lig</div><h1 class="cond">Krallar Ligi</h1></div>
-<div class="pills"><span class="pill accent">MH3 – MH11</span><span class="pill">MH11 devam ediyor</span><span class="pill">Güncelleme: 08.11.2026 00:09</span></div>
+<div class="pills"><span class="pill accent">MH3 – MH11</span><span class="pill">MH11 devam ediyor</span><span class="pill">Güncelleme: <time data-local datetime="2026-11-08T00:14+03:00" title="Türkiye saati: 08.11.2026 00:14">08.11.2026 00:14 TSİ</time></span></div>
 </div></header>
 <main>
 <div class="bar"><h2 class="cond">Sıralama</h2><span class="muted">18 takım · değişim: MH10 sırasına göre</span></div>
@@ -142,9 +142,10 @@ td .none{color:#5A6270}
 <div><span class="b early">3K · 1</span>MH1-2: puan ve joker sayılmaz</div>
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 </div>
-<p class="muted">Puan, MH3'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-2) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her gün 23:59'da, Salı günleri ayrıca 10:00'da güncellenir; maç haftası sürerken son haftanın puanı geçicidir.</p>
+<p class="muted">Puan, MH3'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-2) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her gün 23:59'da, Salı günleri ayrıca 10:00'da (Türkiye saati) güncellenir; güncelleme saati tarayıcınızın saatine göre gösterilir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>
 <section class="legend"><h2 class="cond">Sıra değişimi</h2><div class="keys"><div><span class="mv up" title="Önceki hafta 5. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M4.5 0 9 8H0z"/></svg><span aria-hidden="true">3</span><span class="sr">3 sıra yükseldi</span></span>Önceki haftaya göre 3 sıra yükseldi</div><div><span class="mv down" title="Önceki hafta 3. sıradaydı"><svg aria-hidden="true" viewBox="0 0 9 8"><path d="M0 0h9L4.5 8z"/></svg><span aria-hidden="true">5</span><span class="sr">5 sıra düştü</span></span>Önceki haftaya göre 5 sıra düştü</div><div><span class="mv same" title="Sırası değişmedi"><span aria-hidden="true">–</span><span class="sr">Sırası değişmedi</span></span>Sırası değişmedi</div></div><p class="muted">Karşılaştırma, bir önceki maç haftasının sonundaki sıralamaya göre yapılır (aynı kural: MH3'ten itibaren toplam, eşitlikte o haftanın puanı). Hafta sürerken değişim de geçicidir.</p></section>
 </main>
+<script>(function(){var t=document.querySelector('time[data-local]');if(!t)return;var d=new Date(t.getAttribute('datetime'));if(isNaN(d))return;function p(n){return(n<10?'0':'')+n}t.textContent=p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());})();</script>
 </body>
 </html>
