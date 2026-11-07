@@ -72,30 +72,6 @@ td .mv{font-size:12px;padding:3px 7px;border-radius:6px}
 td .mv svg{width:8px;height:7px}
 td .b{font-size:12px;min-width:28px;padding:5px 6px;margin:1px}
 td .none{color:#5A6270}
-/* weekly movers history: cards on phones, table on wide screens */
-.history{display:flex;flex-direction:column;gap:12px}
-.history>p{margin:0;padding:0 8px}
-.hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.hist .wk,.hist details{background:#fff;border-radius:12px;box-shadow:0 1px 2px rgba(18,22,28,.06)}
-.hist .wk{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
-.hist details{padding:0}
-.hist details .hist{padding:0 0 8px}
-.hist details .wk{box-shadow:none;border-top:1px solid #ECEEF1;border-radius:0}
-.hist summary{cursor:pointer;padding:12px 14px;font-size:13px;font-weight:600;color:ACCENT}
-.wkhead{display:flex;align-items:center;gap:8px}
-.wkhead .gw{font-weight:700;font-size:20px;line-height:1}
-.tag{white-space:nowrap;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:#E4E6EA;color:#4A515C}
-.mvline{display:flex;gap:10px;align-items:flex-start}
-.mvline .mv{flex:none;width:40px;justify-content:center;font-size:12px;padding:3px 0;border-radius:6px}
-.mvline .mv svg{width:8px;height:7px}
-.mvteams{min-width:0;display:flex;flex-wrap:wrap;gap:2px 14px;font-size:14px}
-.mvteams b{font-weight:600}
-.mvteams .muted{white-space:nowrap}
-.histwrap{display:none;background:#fff;border-radius:14px;box-shadow:0 1px 2px rgba(18,22,28,.06)}
-.histwrap table{min-width:0}
-.histwrap th{text-align:left}
-.histwrap td{text-align:left;vertical-align:top;padding:12px 8px}
-.histwrap th:first-child,.histwrap td:first-child{padding-left:16px;width:190px}
 .legend{background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;font-size:13px}
 .legend h2{font-size:18px}
 .legend dl{margin:0;display:grid;grid-template-columns:40px 1fr;row-gap:6px}
@@ -107,8 +83,7 @@ td .none{color:#5A6270}
   header{padding:40px 24px 32px}
   h1{font-size:56px}
   main{padding:28px 24px 48px}
-  .cards,.movers,.hist{display:none}
-  .histwrap{display:block}
+  .cards,.movers{display:none}
   .tablewrap{display:block}
   .legend dl{grid-template-columns:repeat(5,auto 1fr);column-gap:8px}
   .keys{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
@@ -209,60 +184,6 @@ def _top_movers(rows: list[dict]) -> str:
             f'{_mover_box("En çok yükselen", up)}{_mover_box("En çok düşen", down)}</section>')
 
 
-HISTORY_OPEN_WEEKS = 5  # phones show this many weeks, the rest sit behind "Tüm haftalar"
-
-
-def _move_line(kind: str, by: int, teams: list[tuple[str, int, int]]) -> str:
-    if teams:
-        badge = _move_badge({"rankChange": by if kind == "up" else -by, "previousRank": teams[0][1]})
-        badge = badge.replace(f' title="Önceki hafta {teams[0][1]}. sıradaydı"', "")
-        names = "".join(
-            f'<span><b>{escape(n)}</b> <span class="muted">{before}. → {after}.</span></span>' for n, before, after in teams
-        )
-    else:
-        badge = _move_badge({"rankChange": 0, "previousRank": 0})
-        names = '<span class="muted">Kimse ' + ("yükselmedi" if kind == "up" else "düşmedi") + "</span>"
-    return f'<div class="mvline">{badge}<div class="mvteams">{names}</div></div>'
-
-
-def _history(movers: list[dict], latest_gw: int, in_progress: bool) -> str:
-    """'Haftanın hareketleri': the biggest riser(s) and faller(s) of every week."""
-    if not movers:
-        return ""
-
-    def tag(m):
-        return '<span class="tag">sürüyor · geçici</span>' if in_progress and m["gameweek"] == latest_gw else ""
-
-    def card(m):
-        return (
-            f'<li class="wk"><div class="wkhead"><span class="gw cond">MH{m["gameweek"]}</span>{tag(m)}</div>'
-            f'{_move_line("up", m["upBy"], m["up"])}{_move_line("down", m["downBy"], m["down"])}</li>'
-        )
-
-    shown, rest = movers[:HISTORY_OPEN_WEEKS], movers[HISTORY_OPEN_WEEKS:]
-    first_gw = movers[-1]["gameweek"]
-    more = (
-        f'<li><details><summary>Tüm haftalar (MH{first_gw}\'ten itibaren)</summary>'
-        f'<ol class="hist">{"".join(card(m) for m in rest)}</ol></details></li>'
-        if rest else ""
-    )
-    trs = "".join(
-        f'<tr><td><div class="wkhead"><span class="gw cond">MH{m["gameweek"]}</span>{tag(m)}</div></td>'
-        f'<td>{_move_line("up", m["upBy"], m["up"])}</td><td>{_move_line("down", m["downBy"], m["down"])}</td></tr>'
-        for m in movers
-    )
-    return (
-        '<section class="history" aria-labelledby="hist-title">'
-        '<div class="bar"><h2 class="cond" id="hist-title">Haftanın hareketleri</h2>'
-        '<span class="muted">her hafta, bir önceki haftaya göre</span></div>'
-        f'<ol class="hist">{"".join(card(m) for m in shown)}{more}</ol>'
-        '<div class="histwrap"><table><thead><tr><th class="cond">Hafta</th><th class="cond">En çok yükselen</th>'
-        f'<th class="cond">En çok düşen</th></tr></thead><tbody>{trs}</tbody></table></div>'
-        '<p class="muted">Aynı sayıda hareket eden takımlar birlikte yazılır.</p>'
-        "</section>"
-    )
-
-
 def render(
     rows: list[dict],
     chips: dict,
@@ -270,7 +191,6 @@ def render(
     updated_at: datetime,
     in_progress: bool = False,
     previous_gw: int | None = None,
-    movers: list[dict] | None = None,
 ) -> str:
     columns = _columns(chips)
     first_gw = EXCLUDED_UNTIL_GW + 1
@@ -338,7 +258,6 @@ def render(
 {chr(10).join(trs)}
 </tbody>
 </table></div>
-{_history(movers or [], gameweek, in_progress)}
 <section class="legend">
 <h2 class="cond">Jokerler</h2>
 <dl>{legend_items}</dl>

@@ -12,9 +12,6 @@ yükselip düştüğü. Önceki sıra cache'teki haftalardan aynı kuralla (MH3+
 haftanın puanı) hesaplanır; sitenin kendi sıra değişimi MH1-2'yi de saydığı için kullanılmaz.
 MH3'te karşılaştırılacak hafta olmadığından gösterilmez.
 
-**Haftanın hareketleri** = her hafta (MH4'ten itibaren) bir önceki haftaya göre en çok
-yükselen ve düşen takım(lar). Telefonda son 5 hafta açık, gerisi "Tüm haftalar" altında.
-
 ## Kurulum
 
 1. Repo → **Settings → Secrets and variables → Actions → New repository secret**:

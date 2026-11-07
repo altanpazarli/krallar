@@ -10,7 +10,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .client import ApiError, Client
-from .compute import EXCLUDED_UNTIL_GW, add_rank_changes, adjusted_standings, collect_chips, weekly_movers
+from .compute import EXCLUDED_UNTIL_GW, add_rank_changes, adjusted_standings, collect_chips
 from .render import render
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -134,7 +134,6 @@ def main() -> int:
 
     rows = adjusted_standings(current, weeks)
     previous_gw = add_rank_changes(rows, weeks, latest_gw)
-    movers = weekly_movers(rows, weeks, latest_gw)
     print(f"\n{'Takım':<26}{'Lig':>6}{'MH3+':>6}{'Fark':>6}{'MH1-2':>7}")
     for r in rows:
         diff = r["leaguePoints"] - r["points"]
@@ -147,7 +146,7 @@ def main() -> int:
 
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
     SITE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    html = render(rows, chips, latest_gw, now, in_progress=in_progress, previous_gw=previous_gw, movers=movers)
+    html = render(rows, chips, latest_gw, now, in_progress=in_progress, previous_gw=previous_gw)
     SITE_PATH.write_text(html, encoding="utf-8")
     print(f"{SITE_PATH.relative_to(ROOT)} yazıldı. Toplam istek: {client.requests_made}")
     return 0

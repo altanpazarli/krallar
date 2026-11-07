@@ -119,38 +119,3 @@ def collect_chips(cache: dict) -> tuple[dict, set]:
         chips[int(team_id)] = team
     return chips, unknown
 
-
-def weekly_movers(rows: list[dict], weeks: dict, latest_gw: int) -> list[dict]:
-    """Biggest rank gain and loss of every counted week, newest first.
-
-    Each item: {"gameweek", "up", "upBy", "down", "downBy"} where up/down list
-    (teamName, previousRank, rank) for every team sharing the biggest move (empty when
-    no team moved that way). Starts at the second counted week (the first has nothing
-    to compare with).
-    """
-    first = EXCLUDED_UNTIL_GW + 1
-    if latest_gw <= first:
-        return []
-    ranks = {gw: ranks_after(rows, weeks, gw) for gw in range(first, latest_gw + 1)}
-    order = sorted(rows, key=lambda r: r["teamName"].casefold())
-    result = []
-    for gw in range(latest_gw, first, -1):
-        before, after = ranks[gw - 1], ranks[gw]
-        moves = [(before[r["teamId"]] - after[r["teamId"]], r["teamName"], before[r["teamId"]], after[r["teamId"]])
-                 for r in order]
-        best = max(m[0] for m in moves)
-        worst = min(m[0] for m in moves)
-
-        def pick(target):
-            return sorted(((n, b, a) for d, n, b, a in moves if d == target), key=lambda t: t[2])
-
-        result.append(
-            {
-                "gameweek": gw,
-                "up": pick(best) if best > 0 else [],
-                "upBy": max(best, 0),
-                "down": pick(worst) if worst < 0 else [],
-                "downBy": max(-worst, 0),
-            }
-        )
-    return result
