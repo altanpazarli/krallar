@@ -41,6 +41,12 @@ def adjusted_standings(current: list[dict], cache: dict) -> list[dict]:
                 "excludedPoints": _week_points(weeks, lambda gw: gw <= EXCLUDED_UNTIL_GW),
             }
         )
+    _assign_ranks(rows)
+    return rows
+
+
+def _assign_ranks(rows: list[dict]) -> None:
+    """Sort by points, then last gameweek points, then name; teams equal on both share a rank."""
     rows.sort(key=lambda r: (-r["points"], -r["gameweekPoints"], r["teamName"].casefold()))
     prev_key = None
     rank = 0
@@ -50,7 +56,44 @@ def adjusted_standings(current: list[dict], cache: dict) -> list[dict]:
             rank = i
             prev_key = key
         row["rank"] = rank
-    return rows
+
+
+def ranks_after(rows: list[dict], weeks: dict, gameweek: int) -> dict[int, int]:
+    """Each team's rank at the end of `gameweek`, by the same rules as adjusted_standings.
+
+    Uses only weeks EXCLUDED_UNTIL_GW < gw <= gameweek; ties are broken by that week's points.
+    """
+    past = []
+    for row in rows:
+        team_weeks = weeks.get(str(row["teamId"]), {})
+        last = team_weeks.get(str(gameweek)) or {}
+        past.append(
+            {
+                "teamId": row["teamId"],
+                "teamName": row["teamName"],
+                "points": _week_points(team_weeks, lambda gw: EXCLUDED_UNTIL_GW < gw <= gameweek),
+                "gameweekPoints": last.get("totalPoints") or 0,
+            }
+        )
+    _assign_ranks(past)
+    return {r["teamId"]: r["rank"] for r in past}
+
+
+def add_rank_changes(rows: list[dict], weeks: dict, latest_gw: int) -> int | None:
+    """Set `previousRank` and `rankChange` (positive = moved up) on each row, compared with
+    the standings at the end of the previous gameweek. Returns that gameweek, or None when
+    there is no counted previous week to compare with (then both fields are None).
+    """
+    previous_gw = latest_gw - 1
+    if previous_gw <= EXCLUDED_UNTIL_GW:
+        for row in rows:
+            row["previousRank"] = row["rankChange"] = None
+        return None
+    before = ranks_after(rows, weeks, previous_gw)
+    for row in rows:
+        row["previousRank"] = before[row["teamId"]]
+        row["rankChange"] = before[row["teamId"]] - row["rank"]
+    return previous_gw
 
 
 def collect_chips(cache: dict) -> tuple[dict, set]:
@@ -75,3 +118,39 @@ def collect_chips(cache: dict) -> tuple[dict, set]:
             weeks_used.sort()
         chips[int(team_id)] = team
     return chips, unknown
+
+
+def weekly_movers(rows: list[dict], weeks: dict, latest_gw: int) -> list[dict]:
+    """Biggest rank gain and loss of every counted week, newest first.
+
+    Each item: {"gameweek", "up", "upBy", "down", "downBy"} where up/down list
+    (teamName, previousRank, rank) for every team sharing the biggest move (empty when
+    no team moved that way). Starts at the second counted week (the first has nothing
+    to compare with).
+    """
+    first = EXCLUDED_UNTIL_GW + 1
+    if latest_gw <= first:
+        return []
+    ranks = {gw: ranks_after(rows, weeks, gw) for gw in range(first, latest_gw + 1)}
+    order = sorted(rows, key=lambda r: r["teamName"].casefold())
+    result = []
+    for gw in range(latest_gw, first, -1):
+        before, after = ranks[gw - 1], ranks[gw]
+        moves = [(before[r["teamId"]] - after[r["teamId"]], r["teamName"], before[r["teamId"]], after[r["teamId"]])
+                 for r in order]
+        best = max(m[0] for m in moves)
+        worst = min(m[0] for m in moves)
+
+        def pick(target):
+            return sorted(((n, b, a) for d, n, b, a in moves if d == target), key=lambda t: t[2])
+
+        result.append(
+            {
+                "gameweek": gw,
+                "up": pick(best) if best > 0 else [],
+                "upBy": max(best, 0),
+                "down": pick(worst) if worst < 0 else [],
+                "downBy": max(-worst, 0),
+            }
+        )
+    return result
