@@ -78,7 +78,8 @@ def test_render_marks_early_chip_and_escapes_names():
     assert '<span class="b free" title="Hücum!: kullanılmadı">HÜ</span>' in html
     # desktop table cells
     assert '<td><span class="b used" title="Tripleks Kaptan: MH10">10</span></td>' in html
-    assert "Güncelleme: 03.11.2026 10:00" in html
+    assert ('Güncelleme: <time data-local datetime="2026-11-03T10:00+03:00" '
+            'title="Türkiye saati: 03.11.2026 10:00">03.11.2026 10:00 TSİ</time>') in html
     assert "MH3 – MH10" in html
 
 
@@ -192,3 +193,12 @@ def test_movers_list_all_teams_sharing_the_biggest_move_and_skip_empty_side():
     still = [dict(r, rankChange=0) for r in rows]
     assert '<section class="movers"' not in render(still, {}, 10, datetime(2026, 11, 3), previous_gw=9)
 
+
+
+def test_update_time_is_turkish_time_and_marked_for_local_display():
+    from zoneinfo import ZoneInfo
+    utc = datetime(2026, 11, 7, 21, 9, tzinfo=ZoneInfo("UTC"))
+    html = render([], {}, 11, utc)
+    assert '<time data-local datetime="2026-11-08T00:09+03:00"' in html  # converted to TSİ
+    assert ">08.11.2026 00:09 TSİ</time>" in html  # fallback text without JavaScript
+    assert "time[data-local]" in html and "getHours()" in html  # browser rewrites it to local time

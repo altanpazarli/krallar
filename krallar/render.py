@@ -1,12 +1,14 @@
 """Render the standings as a single static, mobile-friendly HTML page.
 
 Phones get one card per team (joker badges inline); wider screens get a table.
-No JavaScript; the switch is a CSS media query.
+The phone/desktop switch is a CSS media query. The only script turns the update time
+into the visitor's local time; without it the page shows Turkish time (TSİ).
 """
 
 from __future__ import annotations
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from html import escape
 
 from .compute import CHIPS, EXCLUDED_UNTIL_GW
@@ -185,6 +187,28 @@ def _top_movers(rows: list[dict]) -> str:
             f'{_mover_box("En çok yükselen", up)}{_mover_box("En çok düşen", down)}</section>')
 
 
+TURKEY = ZoneInfo("Europe/Istanbul")
+
+# Rewrites <time data-local> in the visitor's own time zone (same dd.mm.yyyy HH:MM format).
+LOCAL_TIME_JS = (
+    "<script>(function(){var t=document.querySelector('time[data-local]');if(!t)return;"
+    "var d=new Date(t.getAttribute('datetime'));if(isNaN(d))return;"
+    "function p(n){return(n<10?'0':'')+n}"
+    "t.textContent=p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());"
+    "})();</script>"
+)
+
+
+def _update_time(updated_at: datetime) -> str:
+    """Update time in Turkish time, shown in the visitor's local time by LOCAL_TIME_JS."""
+    turkey = (updated_at.replace(tzinfo=TURKEY) if updated_at.tzinfo is None else updated_at).astimezone(TURKEY)
+    stamp = turkey.strftime("%d.%m.%Y %H:%M")
+    return (
+        f'<time data-local datetime="{turkey.isoformat(timespec="minutes")}" '
+        f'title="Türkiye saati: {stamp}">{stamp} TSİ</time>'
+    )
+
+
 def render(
     rows: list[dict],
     chips: dict,
@@ -195,7 +219,7 @@ def render(
 ) -> str:
     columns = _columns(chips)
     first_gw = EXCLUDED_UNTIL_GW + 1
-    stamp = updated_at.strftime("%d.%m.%Y %H:%M")
+    stamp = _update_time(updated_at)
     live_pill = f'<span class="pill">MH{gameweek} devam ediyor</span>' if in_progress else ""
 
     cards, trs = [], []
@@ -267,10 +291,11 @@ def render(
 <div><span class="b early">3K · 1</span>MH1-{EXCLUDED_UNTIL_GW}: puan ve joker sayılmaz</div>
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 </div>
-<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her gün 23:59'da, Salı günleri ayrıca 10:00'da güncellenir; maç haftası sürerken son haftanın puanı geçicidir.</p>
+<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her gün 23:59'da, Salı günleri ayrıca 10:00'da (Türkiye saati) güncellenir; güncelleme saati tarayıcınızın saatine göre gösterilir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>
 {move_legend}
 </main>
+{LOCAL_TIME_JS}
 </body>
 </html>
 """
