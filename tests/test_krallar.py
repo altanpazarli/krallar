@@ -213,3 +213,21 @@ def test_movers_come_first_on_wide_screens_without_extra_markup():
     rows = [{"teamId": 1, "teamName": "A", "points": 9, "gameweekPoints": 0, "rank": 1, "previousRank": 2, "rankChange": 1}]
     html = render(rows, {}, 10, datetime(2026, 11, 3), in_progress=True, previous_gw=9)
     assert "geçici" not in html.split('<section class="movers"')[1].split("</section>")[0]  # no provisional tag in the boxes
+
+
+def test_second_counted_use_of_a_chip_is_marked_as_against_league_rule():
+    rows = [{"teamId": 1, "teamName": "X", "points": 10, "gameweekPoints": 5, "rank": 1}]
+    # MH1 use does not count, so MH5 is the one allowed use; MH18 breaks the once-a-season rule.
+    chips = {1: {"3K": [1, 5, 18]}}
+    html = render(rows, chips, 18, datetime(2026, 11, 3, 10, 0))
+    rule = "lig kuralına aykırı, joker sezonda bir kez kullanılabilir"
+    assert '<span class="b early" title="Tripleks Kaptan: MH1 (sayılmaz, joker geçersiz)">3K · 1</span>' in html
+    assert '<span class="b used" title="Tripleks Kaptan: MH5">3K · 5</span>' in html
+    assert f'<span class="b repeat" title="Tripleks Kaptan: MH18 ({rule})">3K · 18 !</span>' in html
+    assert f'<span class="b repeat" title="Tripleks Kaptan: MH18 ({rule})">18 !</span>' in html
+    assert '<span class="b repeat">3K · 18 !</span>Kural dışı' in html
+
+
+def test_repeat_legend_shown_even_without_violations():
+    html = render([], {}, 10, datetime(2026, 11, 3, 10, 0))
+    assert "Her joker sezonda bir kez kullanılabilir" in html
