@@ -70,18 +70,19 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
 
 - Haberler (sakatlık, ceza, kadro, transfer) için **sporx.com**'u kullan
   (ör. WebSearch'te `allowed_domains: ["sporx.com"]`); haberin tarihini kontrol et, eskiyse söyle.
-- Diğer kaynaklar, ne arandığına göre:
-  - **Resmi (en güvenilir):** kulüplerin resmi siteleri/X hesapları (sakatlık, kadro),
-    **kap.org.tr** (halka açık kulüplerin kesinleşen transferleri), **tff.org** (PFDK cezaları, fikstür).
-  - **İstatistik ve kadro:** **mackolik.com** (fikstür, muhtemel/kesin 11), **sofascore.com**
-    (reyting, dakika, form), **transfermarkt.com.tr** (sakatlık, kart cezası, transfer söylentileri).
-  - **Haber:** **ntvspor.net**, **trtspor.com.tr** (genelde doğrulanmış); **fanatik.com.tr**,
-    **fotomac.com.tr** (transferde hızlı ama çoğu söylenti, temkinli aktar).
-  - **Güncel/son dakika (X):** [x.com/demarkesports](https://x.com/demarkesports) ve benzeri hesaplar,
-    ör. transfer gazetecileri Yağız Sabuncuoğlu (@yagosabuncuoglu), Ekrem Konur (@ekremkonur).
-    X sayfaları girişsiz çoğu zaman okunamaz; o zaman WebSearch ile hesabın paylaşımlarını ara.
-    Bunlar söylenti düzeyindedir: kaynağı belirt, resmi açıklamayla karıştırma.
-- Önerirken önceliği şöyle ver: resmi açıklama > doğrulanmış haber > söylenti; hangisi olduğunu söyle.
+- **Önce hızlı kaynaklara bak** (kullanıcı tercihi: KAP gibi resmi kaynaklar geç güncelleniyor).
+  Aramada bu sırayı izle:
+  1. **Güncel/son dakika (X):** [x.com/demarkesports](https://x.com/demarkesports) ve benzeri hesaplar,
+     ör. transfer gazetecileri Yağız Sabuncuoğlu (@yagosabuncuoglu), Ekrem Konur (@ekremkonur).
+     X sayfaları girişsiz çoğu zaman okunamaz; o zaman WebSearch ile hesabın paylaşımlarını ara.
+  2. **Haber:** sporx.com, **ntvspor.net**, **trtspor.com.tr**, **fanatik.com.tr**, **fotomac.com.tr**.
+  3. **İstatistik ve kadro:** **mackolik.com** (fikstür, muhtemel/kesin 11), **sofascore.com**
+     (reyting, dakika, form), **transfermarkt.com.tr** (sakatlık, kart cezası, transfer söylentileri).
+  4. **Resmi (yavaş ama kesin):** kulüplerin resmi siteleri/X hesapları, **kap.org.tr**
+     (halka açık kulüplerin transferleri), **tff.org** (PFDK cezaları, fikstür). Kesinleşip
+     kesinleşmediğini doğrulamak için bak; resmi açıklama yoksa öneriyi bekletme.
+- Hızlı kaynaklar çoğu zaman söylenti düzeyindedir: her bilginin kaynağını ve durumunu
+  (söylenti / haber / resmi) belirt, birden çok kaynak aynı şeyi söylüyorsa bunu da yaz.
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
   (MH3+) kullandığı jokeri tekrar önerme.
@@ -105,5 +106,5 @@ yazıyorlar). Görsel dil:
 - Renkler: vurgu `#0B6E4F` (ilk 3 sıra, kullanılmış joker), koyu başlık şeridi `#12161C`, zemin `#F3F4F1`,
   kartlar beyaz; yükselen `#E2F1E9`/`#0B5C42`, düşen `#FCE9DB`/`#9A3B06`, ikincil metin `#5A6270`.
 - Kartlar 12px köşe, hafif gölge; telefonda kartlar, 760px ve üstünde tablo.
-- Joker rozetleri üç durumda: kullanıldı (dolu vurgu), MH1-2'de kullanıldı (gri, üstü çizili),
-  kullanılmadı (çerçeveli).
+- Joker rozetleri dört durumda: kullanıldı (dolu vurgu), MH1-2'de kullanıldı (gri, üstü çizili),
+  kullanılmadı (çerçeveli), kural dışı ikinci kullanım (turuncu, kesik çerçeve, "!").
