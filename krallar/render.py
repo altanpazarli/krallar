@@ -314,7 +314,7 @@ def render(
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 <div><span class="b repeat">3K · 18 !</span>Kural dışı: aynı joker ikinci kez kullanıldı</div>
 </div>
-<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her joker sezonda bir kez kullanılabilir (lig kuralı); oyun devre arasından sonra jokerleri yenilese de ikinci kullanım kural dışı olarak işaretlenir. Her gün 23:59'da, Salı günleri ayrıca 10:00'da (Türkiye saati) güncellenir; güncelleme saati tarayıcınızın saatine göre gösterilir; maç haftası sürerken son haftanın puanı geçicidir.</p>
+<p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her joker sezonda bir kez kullanılabilir (lig kuralı); oyun devre arasından sonra jokerleri yenilese de ikinci kullanım kural dışı olarak işaretlenir. Her gün 21:20'de, Salı günleri ayrıca 09:20'de (Türkiye saati) güncellenir, bazen biraz gecikebilir; güncelleme saati tarayıcınızın saatine göre gösterilir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>
 {move_legend}
 </main>

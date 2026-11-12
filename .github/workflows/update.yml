@@ -2,8 +2,9 @@ name: Sıralamayı güncelle
 
 on:
   schedule:
-    - cron: "59 20 * * *" # her gün 20:59 UTC = 23:59 TSİ
-    - cron: "0 7 * * 2" # ayrıca Salı 07:00 UTC = 10:00 TSİ
+    # GitHub zamanlanmış işleri geciktirebilir (eskiden 3-8 saat gecikme görüldü).
+    - cron: "20 18 * * *" # her gün 18:20 UTC = 21:20 TSİ
+    - cron: "20 6 * * 2" # ayrıca Salı 06:20 UTC = 09:20 TSİ
   workflow_dispatch:
 
 permissions:
