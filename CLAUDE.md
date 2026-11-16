@@ -84,6 +84,23 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
 - Hızlı kaynaklar çoğu zaman söylenti düzeyindedir: her bilginin kaynağını ve durumunu
   (söylenti / haber / resmi) belirt, birden çok kaynak aynı şeyi söylüyorsa bunu da yaz.
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
+- **Oyun kuralları:** [tfffantezilig.com/yardim](https://tfffantezilig.com/yardim). Öneri için gereken
+  özet (2026-11-16'da okundu; kural sorusunda emin olmak için sayfayı tekrar kontrol et):
+  - Kadro 15 (2 KL, 5 DF, 5 OS, 3 FV), bütçe 100M, aynı kulüpten en fazla 3. İlk 11'de en az
+    1 KL, 3 DF, 1 FV. Yedekler otomatik girer (oynamayan ilk 11 oyuncusunun yerine, dizilim kuralına uygun).
+  - Transfer sınırı ve cezası yok. Kadro haftanın ilk maçından 1 saat önce kilitlenir.
+  - Kaptan x2; yardımcı kaptan yok.
+  - Puanlar: 60 dk'ya kadar oynamak 1, 60 dk'dan fazla 2; gol KL 10, DF 6, OS 5, FV 4; asist 3;
+    gol yememe (60+ dk) KL/DF 4, OS 1; her 3 kurtarış 1; penaltı kurtarma 5; penaltı kaçırma -2;
+    KL/DF her 2 yenilen gol -1; sarı -1, kırmızı -3, kendi kalesine -2; maçın en iyi üç oyuncusuna
+    bonus 3/2/1.
+  - Jokerler: Tripleks Kaptan (kaptan x3), Dört Dörtlük Kaptan (x4), Tüm Takım Sahaya (yedekler de
+    sayılır), Hücum (dizilim kuralı yok, o hafta bütçe +5M), Limitsiz Bütçe (bütçe sınırsız transfer).
+    Aynı hafta tek joker; açılan joker geri alınamaz.
+  - Bütçe hakkında sayfa yalnızca 100M başlangıcı, Hücum'un "hafta özelinde" +5M'i ve Limitsiz Bütçe'yi
+    yazıyor. Fiyat değişimi, satış değeri ve kartlardan sonraki hafta bütçeye dönüş yazmıyor;
+    öneride bunları kesin kural gibi sunma, oyunda kontrol edilmesini söyle. Yenilenme kuralını sayfa yazmıyor; ligimizde
+    her joker sezonda bir kez (yukarıdaki lig kuralı).
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
   (MH3+) kullandığı jokeri tekrar önerme.
 - Bu sorular kod değişikliği değildir; istenmedikçe repoda bir şey değiştirme.
