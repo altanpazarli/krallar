@@ -140,6 +140,10 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   OS'ye 1 puan; her 2 yenilen gol KL/DF'ye -1. Rakibin hücumu zayıf, kendi defansı sağlam ve iç sahada
   oynayan takımların KL/DF'sini tercih et. Gol yememe olasılığını (rakibin attığı gol x kendi yediği gol,
   iç saha/deplasman) hafta hafta hesapla ve öneride göster.
+- **Karşı karşıya gelen takımlardan ters oyuncu alma** (kullanıcı tercihi): A ile B o hafta
+  oynuyorsa A'nın hücumcusu (OS/FV) ile B'nin kaleci/defansını aynı hafta kadroda tutmamaya çalış;
+  hücumcu gol atarsa kaleci/defans gol yememe puanını kaybeder ve -1 alabilir, puanlar birbirini götürür.
+  Kadro önerirken ve kaydetmeden önce bu çakışmayı kontrol et; kaçınılmazsa söyle.
 - **Yedek sırası önemli** (kullanıcı tercihi): otomatik değişiklik yedek sırasına göre yapılır. Kaleci
   her zaman 1. yedek (zorunlu); diğer yedekleri puan alma olasılığına göre sırala: beklenen puan,
   oynama süresi oranı ve rotasyon riski (ör. Avrupa maçı öncesi). Kadro kaydederken sırayı buna göre ver.
