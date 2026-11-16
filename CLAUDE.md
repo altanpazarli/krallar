@@ -104,6 +104,10 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   4-5-1, 5-4-1, 5-3-2, 5-2-3). Bütçe 100M, kulüp başına 3. Kaydetmeden önce mevcut kadroyu
   (`GET .../squad`) yedekle; kaydettikten sonra yeniden okuyup doğrula. AmsterdamSpor'un takım id'si
   `users/me?league-id=1` → `fantasyTeamId`.
+- **Nostradamus tahminleri:** her maç için 1X2, doğru tahmin +1 puan. Okuma:
+  `GET fantasy-team/predictions?league-id=1&gameweek-id={hafta}`; kaydetme (maç başına, maç başlayana
+  kadar değiştirilebilir): `POST fantasy-team/predictions` gövde `{"matchId": .., "prediction": 1|0|2}`
+  (1 ev sahibi, 0 beraberlik, 2 deplasman). Maç id'leri `projection/stats/fixtures` içindeki hafta maçlarından.
 - **Joker etkinleştirme:** `POST fantasy-team/teams/{id}/chips/{kod}?...` (henüz kullanılmadı; geri
   alınamaz, ancak kullanıcı o an açıkça isterse ve lig kuralına uyuyorsa).
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
