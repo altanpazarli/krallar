@@ -46,6 +46,13 @@ burada tekrarlanmıyor.
   o joker sonra bir kez daha kullanılabilir. Sayfa MH3+ ikinci kullanımı "kural dışı" rozetiyle
   işaretler (`render.py`, `_badge_states`; turuncu, kesik çerçeve, sonunda "!"). Puana bir yaptırım
   yok; yaptırım ileride konuşulabilir.
+- **Lig kuralı, menajer kartı satın almak yasak:** oyunda kartlar App Store / Google Play üzerinden
+  ücretle alınabiliyor; Krallar Ligi'nde satın almak yasak. Oyun her jokeri her yarıda (MH1-16,
+  MH17-34) bir kez bedava verir ve bedava hakkı kullanılmadan satın alınamaz; yani **aynı yarıda aynı
+  jokerin ikinci kullanımı satın alınmış karttır**. Sayfa bunları "kural dışı" gösterir, ayrı bir
+  "satın alındı" rozeti yok. **İstisna (kullanıcı kararı, değiştirme):** MH1-2'deki kullanım ligde
+  sayılmadığı için MH1-2 + MH3-16 kullanımında MH3-16'daki kullanım ilk geçerli kullanım kabul edilir
+  ve normal gösterilir. Öneride kart satın almayı asla önerme.
 - **Bilinmeyen joker kodu** uyarısı log'da çıkarsa `CHIPS` tablosunu güncelle.
 - **Denendi ve kaldırıldı:** "Haftanın hareketleri" bölümü (her hafta için en çok yükselen/düşen
   listesi). Yerine sadece güncel hafta için "En çok yükselen / düşen" kutuları kaldı.
@@ -103,11 +110,24 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
     bonus 3/2/1.
   - Jokerler: Tripleks Kaptan (kaptan x3), Dört Dörtlük Kaptan (x4), Tüm Takım Sahaya (yedekler de
     sayılır), Hücum (dizilim kuralı yok, o hafta bütçe +5M), Limitsiz Bütçe (bütçe sınırsız transfer).
-    Aynı hafta tek joker; açılan joker geri alınamaz.
+    Aynı hafta tek joker; açılan joker geri alınamaz. Yenilenme kuralını sayfa yazmıyor; ligimizde
+    her joker sezonda bir kez (yukarıdaki lig kuralı).
+  - Haftalık toplam = oyuncu puanları (`matchPoints`) + **Nostradamus (tahmin) puanı**
+    (`nostradamusPoints`; AmsterdamSpor MH10'da 4, MH11'de 8). Kurallar sayfası bundan bahsetmiyor ama
+    lig sıralaması bu toplamı kullanıyor; öneride tahminleri yapmayı da hatırlat.
+  - Üçüncü taraf bir kural özeti "kadroyu kaydet"e basana haftalık +1 puan diyor; MH10-11 puan
+    dökümünde böyle bir satır yok (toplam = oyuncu puanları + Nostradamus). Doğrulanmadı, kural gibi sunma.
+  - Ödüller (tfffantezilig.com/oduller): belirli haftalarda ödüllü mini ligler; basına göre sezon
+    birincisine otomobil (resmi değil). Krallar Ligi'nin kendi ödülü/kuralı bunlardan ayrı.
   - Bütçe hakkında sayfa yalnızca 100M başlangıcı, Hücum'un "hafta özelinde" +5M'i ve Limitsiz Bütçe'yi
     yazıyor. Fiyat değişimi, satış değeri ve kartlardan sonraki hafta bütçeye dönüş yazmıyor;
-    öneride bunları kesin kural gibi sunma, oyunda kontrol edilmesini söyle. Yenilenme kuralını sayfa yazmıyor; ligimizde
-    her joker sezonda bir kez (yukarıdaki lig kuralı).
+    öneride bunları kesin kural gibi sunma, oyunda kontrol edilmesini söyle.
+- **Kaleci ve defans seçerken o haftanın rakibine bak** (kullanıcı tercihi): gol yememe KL/DF'ye 4 puan,
+  OS'ye 1 puan; her 2 yenilen gol KL/DF'ye -1. Rakibin hücumu zayıf, kendi defansı sağlam ve iç sahada
+  oynayan takımların KL/DF'sini tercih et. Gol yememe olasılığını (rakibin attığı gol x kendi yediği gol,
+  iç saha/deplasman) hafta hafta hesapla ve öneride göster.
+- **Joker önerirken kaptan adayının maçlarını karşılaştır:** genel gerekçeyle "kullanma" deme; adayın
+  önümüzdeki haftalardaki rakiplerini (rakibin yediği gol, iç saha/deplasman) karşılaştırıp en iyi haftayı öner.
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
   (MH3+) kullandığı jokeri tekrar önerme.
 - Bu sorular kod değişikliği değildir; istenmedikçe repoda bir şey değiştirme.
