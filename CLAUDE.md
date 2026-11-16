@@ -96,6 +96,16 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   (haftalar, maçlar, kilit saati), `fantasy-team/teams/{id}/squad` (mevcut kadro). Oyunun
   `availabilityStatus` alanı sakatlıkları göstermiyor (sadece ceza/ayrılma); sakatlığı haberden kontrol et.
   Kullanıcı API'ye geniş izin verdi ama kadroyu değiştiren (POST/PUT) istekleri ancak o an açıkça isterse at.
+- **Kadro kaydetme / transfer:** `PUT fantasy-team/teams/{id}/squad`, gövde
+  `{"leagueId": <users/me leagueId>, "players": [{playerId, slotOrder, isStarting, captain, viceCaptain}, ...]}`
+  (15 oyuncu). Transferler de bu istekle yapılır: listeye yeni oyuncuyu koymak yeterli. `slotOrder`:
+  ilk 11'de her mevki içinde 1'den başlar (KL 1; DF 1-4; ...), yedeklerde 1-4 (yedek sırası, KL önce).
+  Kaptan ve yardımcı kaptan ilk 11'den olmalı. Dizilim ilk 11'den çıkar (3-5-2, 3-4-3, 4-3-3, 4-4-2,
+  4-5-1, 5-4-1, 5-3-2, 5-2-3). Bütçe 100M, kulüp başına 3. Kaydetmeden önce mevcut kadroyu
+  (`GET .../squad`) yedekle; kaydettikten sonra yeniden okuyup doğrula. AmsterdamSpor'un takım id'si
+  `users/me?league-id=1` → `fantasyTeamId`.
+- **Joker etkinleştirme:** `POST fantasy-team/teams/{id}/chips/{kod}?...` (henüz kullanılmadı; geri
+  alınamaz, ancak kullanıcı o an açıkça isterse ve lig kuralına uyuyorsa).
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
 - **Oyun kuralları:** [tfffantezilig.com/yardim](https://tfffantezilig.com/yardim). Öneri için gereken
   özet (2026-11-16'da okundu; kural sorusunda emin olmak için sayfayı tekrar kontrol et):
@@ -126,6 +136,9 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   OS'ye 1 puan; her 2 yenilen gol KL/DF'ye -1. Rakibin hücumu zayıf, kendi defansı sağlam ve iç sahada
   oynayan takımların KL/DF'sini tercih et. Gol yememe olasılığını (rakibin attığı gol x kendi yediği gol,
   iç saha/deplasman) hafta hafta hesapla ve öneride göster.
+- **Yedek sırası önemli** (kullanıcı tercihi): otomatik değişiklik yedek sırasına göre yapılır. Kaleci
+  her zaman 1. yedek (zorunlu); diğer yedekleri puan alma olasılığına göre sırala: beklenen puan,
+  oynama süresi oranı ve rotasyon riski (ör. Avrupa maçı öncesi). Kadro kaydederken sırayı buna göre ver.
 - **Joker önerirken kaptan adayının maçlarını karşılaştır:** genel gerekçeyle "kullanma" deme; adayın
   önümüzdeki haftalardaki rakiplerini (rakibin yediği gol, iç saha/deplasman) karşılaştırıp en iyi haftayı öner.
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
