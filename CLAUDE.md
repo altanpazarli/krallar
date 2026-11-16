@@ -83,13 +83,20 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
      kesinleşmediğini doğrulamak için bak; resmi açıklama yoksa öneriyi bekletme.
 - Hızlı kaynaklar çoğu zaman söylenti düzeyindedir: her bilginin kaynağını ve durumunu
   (söylenti / haber / resmi) belirt, birden çok kaynak aynı şeyi söylüyorsa bunu da yaz.
+- **Oyuncu verisi API'den okunabilir** (`.env` girişiyle):
+  `projection/stats/player-stats?league-id=1` (oyuncu, `cost` fiyat, puan, form, sahiplik, ceza/ayrılma
+  durumu), `projection/stats/club-stats?league-id=1` (kulüp adları), `projection/stats/fixtures?league-id=1`
+  (haftalar, maçlar, kilit saati), `fantasy-team/teams/{id}/squad` (mevcut kadro). Oyunun
+  `availabilityStatus` alanı sakatlıkları göstermiyor (sadece ceza/ayrılma); sakatlığı haberden kontrol et.
+  Kullanıcı API'ye geniş izin verdi ama kadroyu değiştiren (POST/PUT) istekleri ancak o an açıkça isterse at.
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
 - **Oyun kuralları:** [tfffantezilig.com/yardim](https://tfffantezilig.com/yardim). Öneri için gereken
   özet (2026-11-16'da okundu; kural sorusunda emin olmak için sayfayı tekrar kontrol et):
   - Kadro 15 (2 KL, 5 DF, 5 OS, 3 FV), bütçe 100M, aynı kulüpten en fazla 3. İlk 11'de en az
     1 KL, 3 DF, 1 FV. Yedekler otomatik girer (oynamayan ilk 11 oyuncusunun yerine, dizilim kuralına uygun).
   - Transfer sınırı ve cezası yok. Kadro haftanın ilk maçından 1 saat önce kilitlenir.
-  - Kaptan x2; yardımcı kaptan yok.
+  - Kaptan x2. Kurallar sayfası yazmasa da oyunda yardımcı kaptan var (API: `viceCaptainPlayerId`);
+    kaptan oynamazsa kaptanlık ona geçer (MH11'de böyle oldu).
   - Puanlar: 60 dk'ya kadar oynamak 1, 60 dk'dan fazla 2; gol KL 10, DF 6, OS 5, FV 4; asist 3;
     gol yememe (60+ dk) KL/DF 4, OS 1; her 3 kurtarış 1; penaltı kurtarma 5; penaltı kaçırma -2;
     KL/DF her 2 yenilen gol -1; sarı -1, kırmızı -3, kendi kalesine -2; maçın en iyi üç oyuncusuna
