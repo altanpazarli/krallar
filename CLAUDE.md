@@ -49,8 +49,10 @@ burada tekrarlanmıyor.
 - **Lig kuralı, menajer kartı satın almak yasak:** oyunda kartlar App Store / Google Play üzerinden
   ücretle alınabiliyor; Krallar Ligi'nde satın almak yasak. Oyun her jokeri her yarıda (MH1-16,
   MH17-34) bir kez bedava verir ve bedava hakkı kullanılmadan satın alınamaz; yani **aynı yarıda aynı
-  jokerin ikinci kullanımı satın alınmış karttır**. Sayfa bunları "kural dışı" gösterir, ayrı bir
-  "satın alındı" rozeti yok. **İstisna (kullanıcı kararı, değiştirme):** MH1-2'deki kullanım ligde
+  jokerin ikinci kullanımı satın alınmış karttır**. Sayfa her çalıştırmada takımların joker geçmişini
+  (`chips/history`, `source`: "FREE" ya da satın alma; "FREE" dışı her değer satın alma sayılır) çeker
+  ve satın alınmış ikinci kullanımı kırmızı "₺" rozetiyle gösterir (`compute.purchased_chips`,
+  `render._badge_states`). **İstisna (kullanıcı kararı, değiştirme):** MH1-2'deki kullanım ligde
   sayılmadığı için MH1-2 + MH3-16 kullanımında MH3-16'daki kullanım ilk geçerli kullanım kabul edilir
   ve normal gösterilir. Öneride kart satın almayı asla önerme.
 - **Bilinmeyen joker kodu** uyarısı log'da çıkarsa `CHIPS` tablosunu güncelle.
@@ -108,8 +110,14 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   `GET fantasy-team/predictions?league-id=1&gameweek-id={hafta}`; kaydetme (maç başına, maç başlayana
   kadar değiştirilebilir): `POST fantasy-team/predictions` gövde `{"matchId": .., "prediction": 1|0|2}`
   (1 ev sahibi, 0 beraberlik, 2 deplasman). Maç id'leri `projection/stats/fixtures` içindeki hafta maçlarından.
-- **Joker etkinleştirme:** `POST fantasy-team/teams/{id}/chips/{kod}?...` (henüz kullanılmadı; geri
-  alınamaz, ancak kullanıcı o an açıkça isterse ve lig kuralına uyuyorsa).
+- **Joker etkinleştirme:** önce `GET fantasy-team/teams/{id}/chips?league-id=1` ile durumu oku
+  (`isAvailable` = bedava hak var, `canPurchase` = sadece satın alınabilir). Açmak:
+  `POST fantasy-team/teams/{id}/chips/activate?league-id=1` gövde `{"chipCode": "chip.quadruplecaptain"}`
+  (yalnızca `isAvailable` true iken; bedava hakkı kullanır). **Satın alma** ayrı bir istek
+  (`/api/purchase/create`, ödeme sayfasına yönlendirir): ligde yasak, asla çağırma. Açılan joker
+  kilit saatine kadar `isCancellable: true` görünüyor (kurallar sayfası "iptal edilemez" diyor; iptal
+  denenmedi). Ancak kullanıcı o an açıkça isterse ve lig kuralına uyuyorsa aç. AmsterdamSpor MH12'de
+  Dört Dörtlük Kaptan'ı (Salah) açtı.
 - Hafta tarihleri ve milli aralar için yukarıdaki "Takvim ve milli aralar" bölümüne bak.
 - **Oyun kuralları:** [tfffantezilig.com/yardim](https://tfffantezilig.com/yardim). Öneri için gereken
   özet (2026-11-16'da okundu; kural sorusunda emin olmak için sayfayı tekrar kontrol et):
@@ -171,5 +179,6 @@ yazıyorlar). Görsel dil:
 - Renkler: vurgu `#0B6E4F` (ilk 3 sıra, kullanılmış joker), koyu başlık şeridi `#12161C`, zemin `#F3F4F1`,
   kartlar beyaz; yükselen `#E2F1E9`/`#0B5C42`, düşen `#FCE9DB`/`#9A3B06`, ikincil metin `#5A6270`.
 - Kartlar 12px köşe, hafif gölge; telefonda kartlar, 760px ve üstünde tablo.
-- Joker rozetleri dört durumda: kullanıldı (dolu vurgu), MH1-2'de kullanıldı (gri, üstü çizili),
-  kullanılmadı (çerçeveli), kural dışı ikinci kullanım (turuncu, kesik çerçeve, "!").
+- Joker rozetleri beş durumda: kullanıldı (dolu vurgu), MH1-2'de kullanıldı (gri, üstü çizili),
+  kullanılmadı (çerçeveli), kural dışı ikinci kullanım (turuncu, kesik çerçeve, "!"),
+  satın alınmış (kırmızı, düz çerçeve, "₺").

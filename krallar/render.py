@@ -35,6 +35,7 @@ h2{margin:0;font-size:22px;font-weight:700;text-transform:uppercase;letter-spaci
 .b.early{background:#E4E6EA;color:#4A515C;font-weight:500;text-decoration:line-through}
 .b.free{border:1px solid #D5D8DD;color:#5A6270;font-weight:500;padding:4px 6px}
 .b.repeat{background:#FCE9DB;color:#9A3B06;border:1px dashed #9A3B06;padding:4px 6px}
+.b.buy{background:#FBE3E3;color:#9B1C1C;border:1px solid #9B1C1C;padding:4px 6px}
 .r{font-weight:700}
 .r.top{color:ACCENT}
 .mv{display:inline-flex;align-items:center;gap:2px;font-size:11px;font-weight:700;line-height:1;padding:3px 5px;border-radius:5px;white-space:nowrap}
@@ -109,18 +110,21 @@ FONTS = (
 
 
 REPEAT_RULE = "lig kuralına aykırı, joker sezonda bir kez kullanılabilir"
+BUY_RULE = "satın alındı, ligde kart satın almak yasak"
 
 
-def _badge_states(weeks: list[int]) -> list[tuple[int, str]]:
+def _badge_states(weeks: list[int], bought: set[int] | frozenset = frozenset()) -> list[tuple[int, str]]:
     """(gw, class) per use. MH1-2 uses are "early" (not spent); the league allows each chip once
     per season, so only the first counted use is "used" and any later one is a "repeat",
-    even though the game itself renews the chips after the winter break."""
+    even though the game itself renews the chips after the winter break. A later use that
+    the chip history marks as bought is "buy" instead of "repeat"; the first counted use stays
+    "used" even if bought (league decision: MH1-2 uses do not count)."""
     states, counted = [], 0
     for gw in sorted(weeks):
         if gw <= EXCLUDED_UNTIL_GW:
             states.append((gw, "early"))
         else:
-            states.append((gw, "used" if counted == 0 else "repeat"))
+            states.append((gw, "used" if counted == 0 else "buy" if gw in bought else "repeat"))
             counted += 1
     return states
 
@@ -130,11 +134,13 @@ def _badge_title(name: str, gw: int, cls: str) -> str:
         return f"{name}: MH{gw} (sayılmaz, joker geçersiz)"
     if cls == "repeat":
         return f"{name}: MH{gw} ({REPEAT_RULE})"
+    if cls == "buy":
+        return f"{name}: MH{gw} ({BUY_RULE})"
     return f"{name}: MH{gw}"
 
 
 def _badge(name: str, gw: int, cls: str, label: str) -> str:
-    mark = " !" if cls == "repeat" else ""
+    mark = " !" if cls == "repeat" else " ₺" if cls == "buy" else ""
     return f'<span class="b {cls}" title="{escape(_badge_title(name, gw, cls))}">{escape(label)}{mark}</span>'
 
 
@@ -145,7 +151,7 @@ def _columns(chips: dict) -> list[tuple[str, str]]:
     return known + [(k, k) for k in extra]
 
 
-def _card_chips(team_chips: dict, columns: list[tuple[str, str]]) -> str:
+def _card_chips(team_chips: dict, columns: list[tuple[str, str]], team_bought: dict | None = None) -> str:
     out = []
     for key, name in columns:
         weeks = team_chips.get(key) or []
@@ -153,15 +159,15 @@ def _card_chips(team_chips: dict, columns: list[tuple[str, str]]) -> str:
             if key in {k for k, _n, _c in CHIPS}:
                 out.append(f'<span class="b free" title="{escape(name)}: kullanılmadı">{escape(key)}</span>')
             continue
-        for gw, cls in _badge_states(weeks):
+        for gw, cls in _badge_states(weeks, (team_bought or {}).get(key, frozenset())):
             out.append(_badge(name, gw, cls, f"{key} · {gw}"))
     return "".join(out)
 
 
-def _table_cell(weeks: list[int] | None, name: str) -> str:
+def _table_cell(weeks: list[int] | None, name: str, bought: set[int] | frozenset = frozenset()) -> str:
     if not weeks:
         return f'<td><span class="none" title="{escape(name)}: kullanılmadı">–</span></td>'
-    badges = "".join(_badge(name, gw, cls, str(gw)) for gw, cls in _badge_states(weeks))
+    badges = "".join(_badge(name, gw, cls, str(gw)) for gw, cls in _badge_states(weeks, bought))
     return f"<td>{badges}</td>"
 
 
@@ -238,6 +244,7 @@ def render(
     updated_at: datetime,
     in_progress: bool = False,
     previous_gw: int | None = None,
+    purchased: dict | None = None,
 ) -> str:
     columns = _columns(chips)
     first_gw = EXCLUDED_UNTIL_GW + 1
@@ -247,17 +254,18 @@ def render(
     cards, trs = [], []
     for row in rows:
         team_chips = chips.get(row["teamId"], {})
+        team_bought = (purchased or {}).get(row["teamId"], {})
         rank_cls = "r cond top" if row["rank"] <= 3 else "r cond"
         name = escape(row["teamName"])
         cards.append(
             f'<li class="card"><div class="rk"><div class="{rank_cls}">{row["rank"]}</div>{_move_badge(row)}</div>'
             f'<div class="mid"><div class="name">{name}</div>'
-            f'<div class="chips">{_card_chips(team_chips, columns)}</div></div>'
+            f'<div class="chips">{_card_chips(team_chips, columns, team_bought)}</div></div>'
             f'<div class="score"><div class="pts cond">{row["points"]}</div>'
             f'<div class="muted">MH{gameweek}: {row["gameweekPoints"]}</div></div></li>'
         )
         move_cell = f"<td>{_move_badge(row)}</td>" if previous_gw else ""
-        cells = "".join(_table_cell(team_chips.get(k), n) for k, n in columns)
+        cells = "".join(_table_cell(team_chips.get(k), n, team_bought.get(k, frozenset())) for k, n in columns)
         trs.append(
             f'<tr><td><span class="{rank_cls}">{row["rank"]}</span></td>{move_cell}'
             f'<td class="team">{name}</td><td class="num pts cond">{row["points"]}</td>'
@@ -313,6 +321,7 @@ def render(
 <div><span class="b early">3K · 1</span>MH1-{EXCLUDED_UNTIL_GW}: puan ve joker sayılmaz</div>
 <div><span class="b free">3K</span>Henüz kullanılmadı</div>
 <div><span class="b repeat">3K · 18 !</span>Kural dışı: aynı joker ikinci kez kullanıldı</div>
+<div><span class="b buy">3K · 9 ₺</span>Satın alındı (ligde yasak)</div>
 </div>
 <p class="muted">Puan, MH{first_gw}'ten itibaren toplamdır. Eşit puanda son maç haftası puanı yüksek olan önde yer alır. Gri haftalar (MH1-{EXCLUDED_UNTIL_GW}) puana sayılmaz; bu haftalarda kullanılan joker de harcanmış sayılmaz. Her joker sezonda bir kez kullanılabilir (lig kuralı); oyun devre arasından sonra jokerleri yenilese de ikinci kullanım kural dışı olarak işaretlenir. Her gün 21:20'de, Salı günleri ayrıca 09:20'de (Türkiye saati) güncellenir, bazen biraz gecikebilir; güncelleme saati tarayıcınızın saatine göre gösterilir; maç haftası sürerken son haftanın puanı geçicidir.</p>
 </section>

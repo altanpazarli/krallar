@@ -119,3 +119,21 @@ def collect_chips(cache: dict) -> tuple[dict, set]:
         chips[int(team_id)] = team
     return chips, unknown
 
+
+
+def purchased_chips(histories: dict) -> dict[int, dict[str, set[int]]]:
+    """From {teamId: chip history list} build {teamId: {columnKey: {gw, ...}}} of bought chips.
+
+    The game gives each chip free once per half; anything whose `source` is not "FREE"
+    was bought (in-app purchase), which the Krallar league forbids. Only the "FREE" value
+    has been seen so far, so every other value counts as a purchase.
+    """
+    out: dict[int, dict[str, set[int]]] = {}
+    for team_id, history in histories.items():
+        for item in history or []:
+            if (item.get("source") or "FREE") == "FREE" or item.get("gameweekId") is None:
+                continue
+            code = item.get("chipCode") or ""
+            key = CODE_TO_KEY.get(code, code)
+            out.setdefault(int(team_id), {}).setdefault(key, set()).add(int(item["gameweekId"]))
+    return out

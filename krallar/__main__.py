@@ -10,7 +10,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .client import ApiError, Client
-from .compute import EXCLUDED_UNTIL_GW, add_rank_changes, adjusted_standings, collect_chips
+from .compute import EXCLUDED_UNTIL_GW, add_rank_changes, adjusted_standings, collect_chips, purchased_chips
 from .render import render
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -144,9 +144,19 @@ def main() -> int:
     for code in sorted(unknown):
         print(f"UYARI: bilinmeyen joker kodu: {code} (krallar/compute.py CHIPS tablosunu güncelleyin)")
 
+    histories = {}
+    for row in current:
+        try:
+            histories[row["teamId"]] = client.get_chip_history(row["teamId"]) or []
+        except ApiError as exc:
+            print(f"UYARI: {row['teamName']} joker geçmişi alınamadı ({exc}); satın alma işaretlenmeyecek.")
+    purchased = purchased_chips(histories)
+    for team_id, keys in purchased.items():
+        print(f"Satın alınmış joker: takım {team_id}: {', '.join(f'{k} MH{sorted(v)}' for k, v in keys.items())}")
+
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
     SITE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    html = render(rows, chips, latest_gw, now, in_progress=in_progress, previous_gw=previous_gw)
+    html = render(rows, chips, latest_gw, now, in_progress=in_progress, previous_gw=previous_gw, purchased=purchased)
     SITE_PATH.write_text(html, encoding="utf-8")
     print(f"{SITE_PATH.relative_to(ROOT)} yazıldı. Toplam istek: {client.requests_made}")
     return 0

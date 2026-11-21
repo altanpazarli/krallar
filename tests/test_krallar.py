@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from krallar.compute import adjusted_standings, collect_chips
+from krallar.compute import adjusted_standings, collect_chips, purchased_chips
 from krallar.render import render
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -231,3 +231,36 @@ def test_second_counted_use_of_a_chip_is_marked_as_against_league_rule():
 def test_repeat_legend_shown_even_without_violations():
     html = render([], {}, 10, datetime(2026, 11, 3, 10, 0))
     assert "Her joker sezonda bir kez kullanılabilir" in html
+
+
+def test_purchased_chips_from_chip_history():
+    histories = {
+        1: [
+            {"chipCode": "chip.triplecaptain", "gameweekId": 5, "source": "FREE", "status": "USED"},
+            {"chipCode": "chip.triplecaptain", "gameweekId": 9, "source": "PURCHASE", "status": "USED"},
+            {"chipCode": "chip.mystery", "gameweekId": 7, "source": "PAID", "status": "USED"},
+        ],
+        2: [],
+    }
+    assert purchased_chips(histories) == {1: {"3K": {9}, "chip.mystery": {7}}}
+
+
+def test_purchased_repeat_gets_red_badge_and_first_counted_use_stays_normal():
+    rows = [{"teamId": 1, "teamName": "X", "points": 10, "gameweekPoints": 5, "rank": 1},
+            {"teamId": 2, "teamName": "Y", "points": 9, "gameweekPoints": 5, "rank": 2}]
+    # X: free MH5, bought MH9 -> red. Y: free MH1 (not counted), bought MH5 -> first counted use, normal.
+    chips = {1: {"3K": [5, 9]}, 2: {"3K": [1, 5]}}
+    purchased = {1: {"3K": {9}}, 2: {"3K": {5}}}
+    html = render(rows, chips, 10, datetime(2026, 11, 3, 10, 0), purchased=purchased)
+    buy = "satın alındı, ligde kart satın almak yasak"
+    assert f'<span class="b buy" title="Tripleks Kaptan: MH9 ({buy})">3K · 9 ₺</span>' in html
+    assert f'<span class="b buy" title="Tripleks Kaptan: MH9 ({buy})">9 ₺</span>' in html
+    assert '<span class="b used" title="Tripleks Kaptan: MH5">3K · 5</span>' in html
+    assert html.count('class="b buy"') == 2 + 1  # card + table cell + legend sample
+    assert '<span class="b buy">3K · 9 ₺</span>Satın alındı (ligde yasak)' in html
+
+
+def test_render_without_purchase_info_keeps_repeat_badge():
+    rows = [{"teamId": 1, "teamName": "X", "points": 10, "gameweekPoints": 5, "rank": 1}]
+    html = render(rows, {1: {"3K": [5, 9]}}, 10, datetime(2026, 11, 3, 10, 0))
+    assert '<span class="b repeat"' in html and 'class="b buy" title' not in html
