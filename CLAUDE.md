@@ -36,6 +36,10 @@ burada tekrarlanmıyor.
 - **`live` alanına güvenme:** hafta sürerken API `live: false` ile yarım puan döndürüyor.
   Bir hafta ancak fikstürde bitti olarak işaretlenip bütün puan ve bonusları eklenince
   cache'e yazılır; devam eden hafta her çalıştırmada yeniden çekilir.
+- **Devam eden haftanın jokeri:** hafta sürerken `history/{hafta}` yanıtında `teamBreakdown` (yani
+  joker kodu) yok, sadece `chipUsedAt` var; bu yüzden MH12'de açılan jokerler hafta bitene kadar
+  sayfada görünmüyordu. Artık `chipUsedAt` doluysa joker kodu `gameweeks/{hafta}/score`'dan okunuyor
+  (`update_cache`, `client.get_gameweek_score`); fazladan istek yalnızca joker açan takımlar için.
 - **Sıra değişimi (▲/▼):** sitenin kendi sıra değişimi MH1-2'yi de saydığı için kullanılmaz;
   önceki sıra cache'ten aynı kuralla hesaplanır. MH3'te gösterilmez.
 - **Güncelleme saati:** sayfa Türkiye saatini yazar, küçük bir script ziyaretçinin saat
