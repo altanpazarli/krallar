@@ -66,6 +66,10 @@ class Client:
     def get_history(self, team_id: int, gameweek: int) -> dict | None:
         return self._get(f"fantasy-team/teams/{team_id}/history/{gameweek}")
 
+    def get_gameweek_score(self, team_id: int, gameweek: int) -> dict | None:
+        """Live score of a gameweek; unlike history it includes teamBreakdown while the week is on."""
+        return self._get(f"fantasy-team/teams/{team_id}/gameweeks/{gameweek}/score")
+
     def get_chip_history(self, team_id: int) -> list | None:
         """Chips the team has used, each with `source` ("FREE" or a purchase)."""
         return self._get(f"fantasy-team/teams/{team_id}/chips/history", {"league-id": 1})

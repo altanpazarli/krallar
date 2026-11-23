@@ -86,6 +86,9 @@ def update_cache(client: Client, cache: dict, team_ids: list[int], latest_gw: in
                 continue
             weeks.pop(key, None)
             data = client.get_history(team_id, gw)
+            if data is not None and "teamBreakdown" not in data and data.get("chipUsedAt"):
+                # while a week is on, history omits teamBreakdown (and so the chip code)
+                data = client.get_gameweek_score(team_id, gw) or data
             if data is None:
                 entry = None  # team had no entry that week (e.g. joined later)
             else:

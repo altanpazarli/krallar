@@ -264,3 +264,26 @@ def test_render_without_purchase_info_keeps_repeat_badge():
     rows = [{"teamId": 1, "teamName": "X", "points": 10, "gameweekPoints": 5, "rank": 1}]
     html = render(rows, {1: {"3K": [5, 9]}}, 10, datetime(2026, 11, 3, 10, 0))
     assert '<span class="b repeat"' in html and 'class="b buy" title' not in html
+
+
+def test_chip_of_week_in_progress_is_read_from_score_when_history_has_no_breakdown():
+    from krallar.__main__ import update_cache
+
+    class LiveClient:
+        def __init__(self):
+            self.score_calls = []
+
+        def get_history(self, team_id, gw):
+            # during a gameweek history omits teamBreakdown but still has chipUsedAt
+            used = "2026-01-01T09:00:00Z" if team_id == 1 else None
+            return {"totalPoints": 60, "live": False, "chipUsedAt": used}
+
+        def get_gameweek_score(self, team_id, gw):
+            self.score_calls.append((team_id, gw))
+            return {"totalPoints": 61, "teamBreakdown": {"chipCode": "chip.quadruplecaptain"}}
+
+    client = LiveClient()
+    pending = update_cache(client, {}, [1, 2], 1, final=set())
+    assert pending["1"]["1"]["chipCode"] == "chip.quadruplecaptain"
+    assert pending["2"]["1"]["chipCode"] is None
+    assert client.score_calls == [(1, 1)]                 # only teams that used a chip
