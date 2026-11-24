@@ -173,6 +173,15 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   önümüzdeki haftalardaki rakiplerini (rakibin yediği gol, iç saha/deplasman) karşılaştırıp en iyi haftayı öner.
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
   (MH3+) kullandığı jokeri tekrar önerme.
+- **Haftalık WhatsApp özeti** (kullanıcı tercihi, grupta ilgi görüyor): her hafta bittiğinde
+  (fikstürde `finished` ve bütün puan/bonuslar eklenmiş) lig grubu için eğlenceli, Türkçe, emojili bir
+  özet mesajı yaz; kullanıcı istemese de hafta bitince öner. Veriyi API'den al
+  (`gameweeks/{hafta}/score` her takım için, `player-stats` `matchName`/`roundPoints`, MH3+ sıralama
+  `data/history-cache.json`'dan) ve sadece doğrulanmış rakam kullan. MH12 örneğindeki bölümler:
+  haftanın ilk 3'ü ve lig ortalaması, lider değişimi, genel sıralama (MH3+, ▲/▼), kaptan hikâyesi
+  (en çok seçilen kaptanın sonucu, farklı kaptanla kazanan), yardımcı kaptan/joker anekdotu,
+  kimsenin almadığı yıldızlar, yedekte bırakılan puan, gelecek haftanın kilit saati ve büyük maçı.
+  Takımlara saygılı, şakacı ton; AmsterdamSpor'u öne çıkarma, diğer takımlar gibi yaz.
 - Bu sorular kod değişikliği değildir; istenmedikçe repoda bir şey değiştirme.
 
 ## Tasarım
