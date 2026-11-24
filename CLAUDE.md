@@ -59,6 +59,16 @@ burada tekrarlanmıyor.
   `render._badge_states`). **İstisna (kullanıcı kararı, değiştirme):** MH1-2'deki kullanım ligde
   sayılmadığı için MH1-2 + MH3-16 kullanımında MH3-16'daki kullanım ilk geçerli kullanım kabul edilir
   ve normal gösterilir. Öneride kart satın almayı asla önerme.
+- **Workflow (`update.yml`) iki iş:** `update` (test, veri, commit/push, Pages artifact yükleme) ve
+  `deploy` (`needs: update`, `github-pages` environment). Yükleme ve yayınlama aynı işteyken
+  deploy-pages yeni yüklenen artifact'i bazen bulamıyordu ("No artifacts named github-pages"),
+  sürüm yükseltmek çözmedi; ayrı iş çözdü. Yayınlama düşerse sadece başarısız işi yeniden çalıştır.
+  TFF secret'ları repo düzeyinde, environment'a taşıma (update işi environment'sız).
+- **Re-run ve push:** "Re-run" eski commit'i checkout eder; commit adımı push'tan önce
+  `git pull --rebase -X theirs origin main` yapar, çakışmada yeni üretilen `data/` ve `site/` geçer.
+- **Action sürümleri:** checkout v7, setup-uv `v10.4.0` (v8'den beri major etiket yok, tam sürüm
+  yaz), configure-pages v6, upload-pages-artifact v5 (dotfile'ları almaz; `site/`'ta dotfile yok),
+  deploy-pages v5. Yükseltmeden önce release notlarındaki breaking change'lere bak.
 - **Bilinmeyen joker kodu** uyarısı log'da çıkarsa `CHIPS` tablosunu güncelle.
 - **Denendi ve kaldırıldı:** "Haftanın hareketleri" bölümü (her hafta için en çok yükselen/düşen
   listesi). Yerine sadece güncel hafta için "En çok yükselen / düşen" kutuları kaldı.
