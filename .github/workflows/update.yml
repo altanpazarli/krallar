@@ -19,13 +19,11 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@v6
+      # setup-uv v8'den beri yalnızca tam sürüm etiketi yayınlıyor (@v10 yok).
+      - uses: astral-sh/setup-uv@v10.4.0
 
       - run: uv sync --locked
 
@@ -55,5 +53,14 @@ jobs:
         with:
           path: site
 
+  # Ayrı iş: aynı işte yükleme ve yayınlama arka arkaya olunca deploy-pages yeni yüklenen
+  # artifact'i bazen bulamıyordu ("No artifacts named github-pages"). GitHub'ın önerdiği yapı.
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v5
