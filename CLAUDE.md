@@ -170,6 +170,11 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
 - **Yedek sırası önemli** (kullanıcı tercihi): otomatik değişiklik yedek sırasına göre yapılır. Kaleci
   her zaman 1. yedek (zorunlu); diğer yedekleri puan alma olasılığına göre sırala: beklenen puan,
   oynama süresi oranı ve rotasyon riski (ör. Avrupa maçı öncesi). Kadro kaydederken sırayı buna göre ver.
+- **Lig dışı maçlara bak** (kullanıcı tercihi): kadro önerirken o haftanın ve bir sonraki haftanın Avrupa
+  (Şampiyonlar Ligi, Avrupa Ligi, Konferans Ligi) ve Türkiye Kupası maçlarını kontrol et: hangi takım ne zaman
+  oynadı/oynayacak, lig maçına kaç gün dinlenme kalıyor, zayıf rakibe karşı rotasyon ihtimali, maçta sakatlanan
+  ya da dinlendirilen oyuncu. API fikstürü bunları içermiyor; haberden bak. 2026-27'de Avrupa'da GS, FB (ŞL),
+  BJK (AL), TS (KL) var. Rotasyon riski olan oyuncuyu ilk 11'de tutuyorsan yedek sırasını buna göre ver ve söyle.
 - **Joker önerirken kaptan adayının maçlarını karşılaştır:** genel gerekçeyle "kullanma" deme; adayın
   önümüzdeki haftalardaki rakiplerini (rakibin yediği gol, iç saha/deplasman) karşılaştırıp en iyi haftayı öner.
 - Joker önerirken lig kuralını uygula: oyun MH17'de jokerleri yenilese de takımın daha önce
