@@ -170,6 +170,11 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
 - **Yedek sırası önemli** (kullanıcı tercihi): otomatik değişiklik yedek sırasına göre yapılır. Kaleci
   her zaman 1. yedek (zorunlu); diğer yedekleri puan alma olasılığına göre sırala: beklenen puan,
   oynama süresi oranı ve rotasyon riski (ör. Avrupa maçı öncesi). Kadro kaydederken sırayı buna göre ver.
+- **Dizilimi her hafta yeniden düşün** (kullanıcı tercihi): her hafta aynı dizilimi oynamak zorunda
+  değiliz. Kadro kurarken ve her oyuncu değişikliğinde izin verilen bütün dizilimleri (3-5-2, 3-4-3, 4-3-3,
+  4-4-2, 4-5-1, 5-4-1, 5-3-2, 5-2-3) ilk 11'in beklenen puanına göre karşılaştır; en iyi alternatifi ve
+  beklenen puan farkını öneride göster. Bunu kilitten dakikalar önce değil, erken yap. Kullanıcı stratejik
+  nedenle başka dizilim seçebilir (ör. MH13'te rakiplere karşı sigorta için Osimhen'i ilk 11'de tuttu).
 - **Lig dışı maçlara bak** (kullanıcı tercihi): kadro önerirken o haftanın ve bir sonraki haftanın Avrupa
   (Şampiyonlar Ligi, Avrupa Ligi, Konferans Ligi) ve Türkiye Kupası maçlarını kontrol et: hangi takım ne zaman
   oynadı/oynayacak, lig maçına kaç gün dinlenme kalıyor, zayıf rakibe karşı rotasyon ihtimali, maçta sakatlanan
