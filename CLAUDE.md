@@ -119,7 +119,8 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   Kaptan ve yardımcı kaptan ilk 11'den olmalı. Dizilim ilk 11'den çıkar (3-5-2, 3-4-3, 4-3-3, 4-4-2,
   4-5-1, 5-4-1, 5-3-2, 5-2-3). Bütçe 100M, kulüp başına 3. Kaydetmeden önce mevcut kadroyu
   (`GET .../squad`) yedekle; kaydettikten sonra yeniden okuyup doğrula. AmsterdamSpor'un takım id'si
-  `users/me?league-id=1` → `fantasyTeamId`.
+  `users/me?league-id=1` → `fantasyTeamId`. **`users/me`'deki `leagueId` metin (string) dönüyor**, PUT
+  ise sayı istiyor: `int()` ile çevir, yoksa 400 `INVALID_BODY` ("cannot unmarshal string ... leagueId").
 - **Nostradamus tahminleri:** her maç için 1X2, doğru tahmin +1 puan. Okuma:
   `GET fantasy-team/predictions?league-id=1&gameweek-id={hafta}`; kaydetme (maç başına, maç başlayana
   kadar değiştirilebilir): `POST fantasy-team/predictions` gövde `{"matchId": .., "prediction": 1|0|2}`
