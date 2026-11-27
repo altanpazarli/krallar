@@ -188,6 +188,11 @@ Kullanıcı bazen kod dışında transfer ve takım önerisi (kadro, kaptan, jok
   (en çok seçilen kaptanın sonucu, farklı kaptanla kazanan), yardımcı kaptan/joker anekdotu,
   kimsenin almadığı yıldızlar, yedekte bırakılan puan, gelecek haftanın kilit saati ve büyük maçı.
   Takımlara saygılı, şakacı ton; AmsterdamSpor'u öne çıkarma, diğer takımlar gibi yaz.
+- **Grup mesajlarında kadro ipucu verme** (kullanıcı tercihi; gruptakiler rakip): hafta önizlemesi gibi
+  kilitten önce gönderilen mesajlara fırsat maçı, eksik/sakat listesi, kaptan önerisi, rotasyon uyarısı,
+  gol yememe ihtimali gibi kadro kurmaya yarayan bilgi koyma. Sadece herkesin bildiği şeyler: kilit saati,
+  sıralama, fikstür, sonuçlar, büyük maç. İpuçlu analizi kullanıcıya ayrıca ver. Hafta bittikten sonraki
+  özet geçmişe dönük olduğu için serbest.
 - Bu sorular kod değişikliği değildir; istenmedikçe repoda bir şey değiştirme.
 
 ## Tasarım
